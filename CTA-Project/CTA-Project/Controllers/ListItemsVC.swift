@@ -9,10 +9,24 @@
 import UIKit
 
 class ListItemsVC: UIViewController {
-
+    
+    //MARK: Objects
+    
+    
+    //MARK: Setup
+    private func setupListUI() {
+        setupNavBar()
+    }
+    private func setupNavBar() {
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left.square"), style: .done, target: nil, action: nil)
+    }
+    
+    
+    //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
+        setupListUI()
 
     }
     
