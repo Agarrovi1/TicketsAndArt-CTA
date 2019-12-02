@@ -66,6 +66,10 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
         }
         return cell
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailVC = DetailVC()
+        navigationController?.pushViewController(detailVC, animated: true)
+    }
     
     
 }

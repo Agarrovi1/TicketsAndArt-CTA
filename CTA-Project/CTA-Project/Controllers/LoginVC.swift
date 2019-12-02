@@ -18,6 +18,8 @@ class LoginVC: UIViewController {
     @IBAction func loginButtonPressed(_ sender: UIButton) {
     }
     @IBAction func createButtonPressed(_ sender: UIButton) {
+        let signInVC = SignInVC()
+        present(signInVC, animated: true, completion: nil)
     }
     
     //MARK: LifeCycle
