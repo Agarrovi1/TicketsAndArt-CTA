@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class SignInVC: UIViewController {
     
@@ -32,6 +33,7 @@ class SignInVC: UIViewController {
         textField.backgroundColor = .white
         textField.borderStyle = .roundedRect
         textField.autocorrectionType = .no
+        textField.addTarget(self, action: #selector(enterOnEmailTextField), for: .primaryActionTriggered)
         return textField
     }()
     lazy var passwordTextField: UITextField = {
@@ -42,7 +44,7 @@ class SignInVC: UIViewController {
         textField.borderStyle = .roundedRect
         textField.autocorrectionType = .no
         textField.isSecureTextEntry = true
-        //textField.addTarget(self, action: #selector(tryLogIn), for: .primaryActionTriggered)
+        textField.addTarget(self, action: #selector(submitButtonPressed), for: .primaryActionTriggered)
         return textField
     }()
     var selectLabel: UILabel = {
@@ -59,6 +61,7 @@ class SignInVC: UIViewController {
         let button = UIButton()
         button.setTitle("Submit", for: .normal)
         button.setTitleColor(.blue, for: .normal)
+        button.addTarget(self, action: #selector(submitButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -123,6 +126,55 @@ class SignInVC: UIViewController {
     private func setDelegates() {
         apiPicker.delegate = self
         apiPicker.dataSource = self
+    }
+    
+    //MARK: - Functions
+    @objc func enterOnEmailTextField() {
+        emailTextField.resignFirstResponder()
+        passwordTextField.becomeFirstResponder()
+    }
+    @objc func submitButtonPressed() {
+        guard let email = emailTextField.text, !email.isEmpty, let password = passwordTextField.text, !password.isEmpty else {
+            makeAlert(with: "Required", and: "Fill both fields")
+            return
+        }
+        FirebaseAuthService.manager.createNewUser(email: email.lowercased(), password: password) { (result) in
+            self.handleCreatedUser(result: result)
+        }
+    }
+    
+    private func makeAlert(with title: String, and message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
+    
+    //MARK: Handling
+    private func handleCreatedUser(result: (Result<User,Error>)) {
+        let chosenApi = pickerTitles[apiPicker.selectedRow(inComponent: 0)]
+        DispatchQueue.main.async { [weak self] in
+            switch result {
+            case .success(let user):
+                FirestoreService.manager.createAppUser(user: AppUser.init(from: user, apiType: chosenApi)) { [weak self] appUserResponse in
+                    self?.handleCreatedAppUserResponse(result: appUserResponse)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    private func handleCreatedAppUserResponse(result: (Result<(),Error>)) {
+        switch result {
+        case .success:
+            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+                else {return}
+            UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                    window.rootViewController = ItemsTabBarController()
+            }, completion: nil)
+        case .failure(let error):
+            makeAlert(with: "Error", and: "\(error)")
+        }
     }
 
     //MARK: - LifeCycle
