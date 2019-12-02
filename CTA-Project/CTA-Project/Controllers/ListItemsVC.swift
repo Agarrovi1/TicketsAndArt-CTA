@@ -25,6 +25,7 @@ class ListItemsVC: UIViewController {
         setDelegates()
     }
     private func setupNavBar() {
+        navigationItem.title = "List of Things"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left.square"), style: .done, target: nil, action: nil)
     }
     private func setDelegates() {

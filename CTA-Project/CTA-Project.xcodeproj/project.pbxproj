@@ -18,6 +18,8 @@
 		4D222A0A2395791D0039722D /* ItemsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A092395791D0039722D /* ItemsTabBarController.swift */; };
 		4D222A0C2395794B0039722D /* ListItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0B2395794B0039722D /* ListItemsVC.swift */; };
 		4D222A0E23957F350039722D /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0D23957F350039722D /* ListCell.swift */; };
+		4D222A102395968C0039722D /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0F2395968C0039722D /* FavoritesVC.swift */; };
+		4D222A12239599FB0039722D /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A11239599FB0039722D /* DetailVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +48,8 @@
 		4D222A092395791D0039722D /* ItemsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTabBarController.swift; sourceTree = "<group>"; };
 		4D222A0B2395794B0039722D /* ListItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemsVC.swift; sourceTree = "<group>"; };
 		4D222A0D23957F350039722D /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
+		4D222A0F2395968C0039722D /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
+		4D222A11239599FB0039722D /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 				4D222A0723956CD80039722D /* SignInVC.swift */,
 				4D222A092395791D0039722D /* ItemsTabBarController.swift */,
 				4D222A0B2395794B0039722D /* ListItemsVC.swift */,
+				4D222A0F2395968C0039722D /* FavoritesVC.swift */,
+				4D222A11239599FB0039722D /* DetailVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -236,10 +242,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D222A102395968C0039722D /* FavoritesVC.swift in Sources */,
 				4D2229E1239566F40039722D /* AppDelegate.swift in Sources */,
 				4D222A0C2395794B0039722D /* ListItemsVC.swift in Sources */,
 				4D2229E3239566F40039722D /* SceneDelegate.swift in Sources */,
 				4D222A0E23957F350039722D /* ListCell.swift in Sources */,
+				4D222A12239599FB0039722D /* DetailVC.swift in Sources */,
 				4D222A0A2395791D0039722D /* ItemsTabBarController.swift in Sources */,
 				4D222A0823956CD80039722D /* SignInVC.swift in Sources */,
 				4D222A062395683B0039722D /* LoginVC.swift in Sources */,

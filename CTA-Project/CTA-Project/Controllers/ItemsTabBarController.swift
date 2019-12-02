@@ -10,12 +10,13 @@ import UIKit
 
 class ItemsTabBarController: UITabBarController {
     var listItemVC = UINavigationController.init(rootViewController: ListItemsVC())
+    var favVC = UINavigationController.init(rootViewController: FavoritesVC())
 
     override func viewDidLoad() {
         super.viewDidLoad()
         listItemVC.tabBarItem = UITabBarItem(title: "List", image: UIImage(systemName: "line.horizontal.3"), tag: 0)
-
-        viewControllers = [listItemVC]
+        favVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+        viewControllers = [listItemVC,favVC]
         
     }
     

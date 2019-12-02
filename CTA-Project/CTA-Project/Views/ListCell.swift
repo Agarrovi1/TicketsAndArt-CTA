@@ -9,6 +9,12 @@
 import UIKit
 
 class ListCell: UITableViewCell {
+    
+    enum HeartStatus {
+        case filled
+        case notFilled
+    }
+    var heartStatus: HeartStatus = .notFilled
 
     override func awakeFromNib() {
         super.awakeFromNib()
