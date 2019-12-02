@@ -15,6 +15,8 @@
 		4D2229F8239566F90039722D /* CTA_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2229F7239566F90039722D /* CTA_ProjectTests.swift */; };
 		4D222A062395683B0039722D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A052395683B0039722D /* LoginVC.swift */; };
 		4D222A0823956CD80039722D /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0723956CD80039722D /* SignInVC.swift */; };
+		4D222A0A2395791D0039722D /* ItemsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A092395791D0039722D /* ItemsTabBarController.swift */; };
+		4D222A0C2395794B0039722D /* ListItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0B2395794B0039722D /* ListItemsVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +42,8 @@
 		4D2229F9239566F90039722D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D222A052395683B0039722D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		4D222A0723956CD80039722D /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
+		4D222A092395791D0039722D /* ItemsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTabBarController.swift; sourceTree = "<group>"; };
+		4D222A0B2395794B0039722D /* ListItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemsVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,8 @@
 			children = (
 				4D222A052395683B0039722D /* LoginVC.swift */,
 				4D222A0723956CD80039722D /* SignInVC.swift */,
+				4D222A092395791D0039722D /* ItemsTabBarController.swift */,
+				4D222A0B2395794B0039722D /* ListItemsVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -228,7 +234,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D2229E1239566F40039722D /* AppDelegate.swift in Sources */,
+				4D222A0C2395794B0039722D /* ListItemsVC.swift in Sources */,
 				4D2229E3239566F40039722D /* SceneDelegate.swift in Sources */,
+				4D222A0A2395791D0039722D /* ItemsTabBarController.swift in Sources */,
 				4D222A0823956CD80039722D /* SignInVC.swift in Sources */,
 				4D222A062395683B0039722D /* LoginVC.swift in Sources */,
 			);
