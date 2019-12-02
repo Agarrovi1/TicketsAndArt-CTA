@@ -13,6 +13,7 @@
 		4D2229EA239566F80039722D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D2229E9239566F80039722D /* Assets.xcassets */; };
 		4D2229ED239566F80039722D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D2229EB239566F80039722D /* LaunchScreen.storyboard */; };
 		4D2229F8239566F90039722D /* CTA_ProjectTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2229F7239566F90039722D /* CTA_ProjectTests.swift */; };
+		4D222A062395683B0039722D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A052395683B0039722D /* LoginVC.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		4D2229F3239566F90039722D /* CTA-ProjectTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "CTA-ProjectTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D2229F7239566F90039722D /* CTA_ProjectTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CTA_ProjectTests.swift; sourceTree = "<group>"; };
 		4D2229F9239566F90039722D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D222A052395683B0039722D /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 		4D222A02239567CC0039722D /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				4D222A052395683B0039722D /* LoginVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -223,6 +226,7 @@
 			files = (
 				4D2229E1239566F40039722D /* AppDelegate.swift in Sources */,
 				4D2229E3239566F40039722D /* SceneDelegate.swift in Sources */,
+				4D222A062395683B0039722D /* LoginVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
