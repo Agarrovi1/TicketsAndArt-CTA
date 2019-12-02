@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		351DE9FA69F9D3E5A5511891 /* Pods_CTA_ProjectTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF07E9A5DA92BF220FC5B32C /* Pods_CTA_ProjectTests.framework */; };
 		4D2229E1239566F40039722D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2229E0239566F40039722D /* AppDelegate.swift */; };
 		4D2229E3239566F40039722D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2229E2239566F40039722D /* SceneDelegate.swift */; };
 		4D2229E8239566F40039722D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D2229E6239566F40039722D /* Main.storyboard */; };
@@ -20,6 +21,8 @@
 		4D222A0E23957F350039722D /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0D23957F350039722D /* ListCell.swift */; };
 		4D222A102395968C0039722D /* FavoritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0F2395968C0039722D /* FavoritesVC.swift */; };
 		4D222A12239599FB0039722D /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A11239599FB0039722D /* DetailVC.swift */; };
+		4D222A142395A5880039722D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D222A132395A5880039722D /* GoogleService-Info.plist */; };
+		B40ED67C052088F63967048D /* Pods_CTA_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8526CB0D9B546BE6E2C10C5 /* Pods_CTA_Project.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		38A99F84B4DD87616F80322A /* Pods-CTA-Project.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-Project.debug.xcconfig"; path = "Target Support Files/Pods-CTA-Project/Pods-CTA-Project.debug.xcconfig"; sourceTree = "<group>"; };
 		4D2229DD239566F40039722D /* CTA-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "CTA-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D2229E0239566F40039722D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4D2229E2239566F40039722D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -50,6 +54,12 @@
 		4D222A0D23957F350039722D /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 		4D222A0F2395968C0039722D /* FavoritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesVC.swift; sourceTree = "<group>"; };
 		4D222A11239599FB0039722D /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
+		4D222A132395A5880039722D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		617F2FE5EFAF89D31C3E66F2 /* Pods-CTA-ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
+		895F6CF899CFFE4196F6C181 /* Pods-CTA-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-Project.release.xcconfig"; path = "Target Support Files/Pods-CTA-Project/Pods-CTA-Project.release.xcconfig"; sourceTree = "<group>"; };
+		A053FDB9413DF0DCE4BAC36A /* Pods-CTA-ProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
+		B8526CB0D9B546BE6E2C10C5 /* Pods_CTA_Project.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CTA_Project.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF07E9A5DA92BF220FC5B32C /* Pods_CTA_ProjectTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CTA_ProjectTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B40ED67C052088F63967048D /* Pods_CTA_Project.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,18 +75,30 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				351DE9FA69F9D3E5A5511891 /* Pods_CTA_ProjectTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2F5E2AEE48D5C333E5461885 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B8526CB0D9B546BE6E2C10C5 /* Pods_CTA_Project.framework */,
+				CF07E9A5DA92BF220FC5B32C /* Pods_CTA_ProjectTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4D2229D4239566F40039722D = {
 			isa = PBXGroup;
 			children = (
 				4D2229DF239566F40039722D /* CTA-Project */,
 				4D2229F6239566F90039722D /* CTA-ProjectTests */,
 				4D2229DE239566F40039722D /* Products */,
+				E9698DCE6522E9AF1B4FC807 /* Pods */,
+				2F5E2AEE48D5C333E5461885 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,6 +123,7 @@
 				4D2229E9239566F80039722D /* Assets.xcassets */,
 				4D2229EB239566F80039722D /* LaunchScreen.storyboard */,
 				4D2229EE239566F80039722D /* Info.plist */,
+				4D222A132395A5880039722D /* GoogleService-Info.plist */,
 			);
 			path = "CTA-Project";
 			sourceTree = "<group>";
@@ -141,6 +165,18 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		E9698DCE6522E9AF1B4FC807 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				38A99F84B4DD87616F80322A /* Pods-CTA-Project.debug.xcconfig */,
+				895F6CF899CFFE4196F6C181 /* Pods-CTA-Project.release.xcconfig */,
+				A053FDB9413DF0DCE4BAC36A /* Pods-CTA-ProjectTests.debug.xcconfig */,
+				617F2FE5EFAF89D31C3E66F2 /* Pods-CTA-ProjectTests.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -148,9 +184,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D2229FC239566F90039722D /* Build configuration list for PBXNativeTarget "CTA-Project" */;
 			buildPhases = (
+				54A83990E82D59AA60494DD2 /* [CP] Check Pods Manifest.lock */,
 				4D2229D9239566F40039722D /* Sources */,
 				4D2229DA239566F40039722D /* Frameworks */,
 				4D2229DB239566F40039722D /* Resources */,
+				75AB4FAC1126DA84C7D72F6F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -165,6 +203,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4D2229FF239566F90039722D /* Build configuration list for PBXNativeTarget "CTA-ProjectTests" */;
 			buildPhases = (
+				6D22C953E72C311023E4ED35 /* [CP] Check Pods Manifest.lock */,
 				4D2229EF239566F90039722D /* Sources */,
 				4D2229F0239566F90039722D /* Frameworks */,
 				4D2229F1239566F90039722D /* Resources */,
@@ -225,6 +264,7 @@
 				4D2229ED239566F80039722D /* LaunchScreen.storyboard in Resources */,
 				4D2229EA239566F80039722D /* Assets.xcassets in Resources */,
 				4D2229E8239566F40039722D /* Main.storyboard in Resources */,
+				4D222A142395A5880039722D /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -236,6 +276,70 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		54A83990E82D59AA60494DD2 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CTA-Project-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6D22C953E72C311023E4ED35 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CTA-ProjectTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		75AB4FAC1126DA84C7D72F6F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CTA-Project/Pods-CTA-Project-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CTA-Project/Pods-CTA-Project-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CTA-Project/Pods-CTA-Project-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4D2229D9239566F40039722D /* Sources */ = {
@@ -408,6 +512,7 @@
 		};
 		4D2229FD239566F90039722D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 38A99F84B4DD87616F80322A /* Pods-CTA-Project.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -425,6 +530,7 @@
 		};
 		4D2229FE239566F90039722D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 895F6CF899CFFE4196F6C181 /* Pods-CTA-Project.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -442,6 +548,7 @@
 		};
 		4D222A00239566F90039722D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A053FDB9413DF0DCE4BAC36A /* Pods-CTA-ProjectTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -463,6 +570,7 @@
 		};
 		4D222A01239566F90039722D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 617F2FE5EFAF89D31C3E66F2 /* Pods-CTA-ProjectTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
