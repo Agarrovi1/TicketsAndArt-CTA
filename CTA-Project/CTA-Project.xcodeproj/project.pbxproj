@@ -17,6 +17,7 @@
 		4D222A0823956CD80039722D /* SignInVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0723956CD80039722D /* SignInVC.swift */; };
 		4D222A0A2395791D0039722D /* ItemsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A092395791D0039722D /* ItemsTabBarController.swift */; };
 		4D222A0C2395794B0039722D /* ListItemsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0B2395794B0039722D /* ListItemsVC.swift */; };
+		4D222A0E23957F350039722D /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A0D23957F350039722D /* ListCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +45,7 @@
 		4D222A0723956CD80039722D /* SignInVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInVC.swift; sourceTree = "<group>"; };
 		4D222A092395791D0039722D /* ItemsTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsTabBarController.swift; sourceTree = "<group>"; };
 		4D222A0B2395794B0039722D /* ListItemsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListItemsVC.swift; sourceTree = "<group>"; };
+		4D222A0D23957F350039722D /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		4D222A03239567D70039722D /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				4D222A0D23957F350039722D /* ListCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				4D2229E1239566F40039722D /* AppDelegate.swift in Sources */,
 				4D222A0C2395794B0039722D /* ListItemsVC.swift in Sources */,
 				4D2229E3239566F40039722D /* SceneDelegate.swift in Sources */,
+				4D222A0E23957F350039722D /* ListCell.swift in Sources */,
 				4D222A0A2395791D0039722D /* ItemsTabBarController.swift in Sources */,
 				4D222A0823956CD80039722D /* SignInVC.swift in Sources */,
 				4D222A062395683B0039722D /* LoginVC.swift in Sources */,
