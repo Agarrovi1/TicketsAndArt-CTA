@@ -23,10 +23,15 @@ class ListItemsVC: UIViewController {
         table.register(ListCell.self, forCellReuseIdentifier: "listCell")
         return table
     }()
+    var listSearchBar: UISearchBar = {
+        let bar = UISearchBar()
+        return bar
+    }()
     
     //MARK: - Setup
     private func setupListUI() {
         setupNavBar()
+        setListSearchBarConstraints()
         setTableViewContraints()
         setDelegates()
     }
@@ -37,14 +42,23 @@ class ListItemsVC: UIViewController {
     private func setDelegates() {
         listTableView.delegate = self
         listTableView.dataSource = self
+        listSearchBar.delegate = self
     }
     
     //MARK: - Contraints
+    private func setListSearchBarConstraints() {
+        view.addSubview(listSearchBar)
+        listSearchBar.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            listSearchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            listSearchBar.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            listSearchBar.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)])
+    }
     private func setTableViewContraints() {
         view.addSubview(listTableView)
         listTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            listTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            listTableView.topAnchor.constraint(equalTo: listSearchBar.bottomAnchor),
             listTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             listTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             listTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
@@ -84,6 +98,7 @@ class ListItemsVC: UIViewController {
 
 }
 
+//MARK: - Extensions: TableView
 extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
@@ -103,3 +118,7 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+//MARK: SearchBar
+extension ListItemsVC: UISearchBarDelegate {
+    
+}
