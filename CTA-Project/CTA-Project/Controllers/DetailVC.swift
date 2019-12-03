@@ -50,8 +50,8 @@ class DetailVC: UIViewController {
     //MARK: - Setup
     private func setupDetailVC() {
         setDetailImageConstraints()
-        setHeartConstraints()
         setMainLabelConstraints()
+        setHeartConstraints()
         setTextViewConstraints()
     }
     //MARK: - Constraints
@@ -68,16 +68,19 @@ class DetailVC: UIViewController {
         view.addSubview(detailMainDescription)
         detailMainDescription.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            detailMainDescription.trailingAnchor.constraint(equalTo: heartButton.leadingAnchor),
-            detailMainDescription.centerYAnchor.constraint(equalTo: heartButton.centerYAnchor),
-            detailMainDescription.centerXAnchor.constraint(equalTo: detailImage.centerXAnchor)])
+            detailMainDescription.centerXAnchor.constraint(equalTo: detailImage.centerXAnchor),
+            detailMainDescription.widthAnchor.constraint(equalToConstant: 224)])
     }
     private func setHeartConstraints() {
         view.addSubview(heartButton)
         heartButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            heartButton.trailingAnchor.constraint(equalTo: detailImage.trailingAnchor, constant: -20),
-            heartButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor)])
+            heartButton.leadingAnchor.constraint(equalTo: detailMainDescription.trailingAnchor),
+            heartButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerYAnchor),
+            heartButton.widthAnchor.constraint(equalToConstant: heartButton.frame.width),
+            heartButton.heightAnchor.constraint(equalToConstant: heartButton.frame.height),
+        
+            detailMainDescription.centerYAnchor.constraint(equalTo: heartButton.centerYAnchor)])
     }
     private func setTextViewConstraints() {
         view.addSubview(detailTextView)
@@ -88,12 +91,21 @@ class DetailVC: UIViewController {
             detailTextView.trailingAnchor.constraint(equalTo: detailImage.trailingAnchor,constant: -10),
             detailTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)])
     }
+    
+    //MARK: Functions
+    private func loadTicketInfo() {
+        if let event = ticketEvent {
+            detailMainDescription.text = event.name
+            detailTextView.text = "Start Date:\(event.getFormattedDate())\n\n\(event.url)"
+        }
+    }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         setupDetailVC()
+        loadTicketInfo()
         
     }
     

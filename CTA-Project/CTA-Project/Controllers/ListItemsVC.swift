@@ -152,6 +152,7 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailVC()
+        detailVC.ticketEvent = events[indexPath.row]
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
