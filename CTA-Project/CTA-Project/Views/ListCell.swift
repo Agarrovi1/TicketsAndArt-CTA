@@ -50,12 +50,14 @@ class ListCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 20)
         label.text = "Main Description"
+        label.numberOfLines = 2
         return label
     }()
     var additionalInfo: UILabel = {
         let label = UILabel()
         label.font = UIFont.systemFont(ofSize: 17)
         label.text = "Additional Info"
+        label.numberOfLines = 2
         return label
     }()
     var heartButton: UIButton = {
@@ -100,7 +102,8 @@ class ListCell: UITableViewCell {
         NSLayoutConstraint.activate([
             mainDescriptionLabel.topAnchor.constraint(equalTo: listImage.topAnchor),
             mainDescriptionLabel.leadingAnchor.constraint(equalTo: listImage.trailingAnchor, constant: 15),
-            mainDescriptionLabel.widthAnchor.constraint(equalToConstant: 175)
+            mainDescriptionLabel.widthAnchor.constraint(equalToConstant: 175),
+            mainDescriptionLabel.bottomAnchor.constraint(equalTo: contentView.centerYAnchor)
         ])
     }
     func setAdditionalLabelConstraints() {
@@ -109,7 +112,8 @@ class ListCell: UITableViewCell {
         NSLayoutConstraint.activate([
             additionalInfo.leadingAnchor.constraint(equalTo: mainDescriptionLabel.leadingAnchor),
             additionalInfo.topAnchor.constraint(equalTo: mainDescriptionLabel.bottomAnchor, constant: 20),
-            additionalInfo.trailingAnchor.constraint(equalTo: mainDescriptionLabel.trailingAnchor)])
+            additionalInfo.trailingAnchor.constraint(equalTo: mainDescriptionLabel.trailingAnchor),
+            additionalInfo.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)])
     }
     
     

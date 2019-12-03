@@ -15,6 +15,21 @@ class ListItemsVC: UIViewController {
             print(apiType)
         }
     }
+    var searchQuery: String? {
+        didSet {
+            guard let searchQuery = searchQuery, !searchQuery.isEmpty else {
+                return
+            }
+            DispatchQueue.main.async {
+                self.loadEvents(query: searchQuery.lowercased())
+            }
+        }
+    }
+    var events = [Event]() {
+        didSet {
+            listTableView.reloadData()
+        }
+    }
     
     //MARK: - Objects
     var listTableView: UITableView = {
@@ -80,6 +95,17 @@ class ListItemsVC: UIViewController {
             }
         }
     }
+    private func loadEvents(query: String) {
+        TicketAPIHelper.manager.getEvents(query: query) { (result) in
+            switch result {
+            case .failure(let error):
+                //self.makeAlert(with: "Error", and: "\(error)")
+                print(error)
+            case .success(let eventsFromJson):
+                self.events = eventsFromJson
+            }
+        }
+    }
     private func makeAlert(with title: String, and message: String) {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
@@ -101,12 +127,26 @@ class ListItemsVC: UIViewController {
 //MARK: - Extensions: TableView
 extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        return events.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ListCell else {
             return UITableViewCell()
+        }
+        let event = events[indexPath.row]
+        cell.mainDescriptionLabel.text = event.name
+        cell.additionalInfo.text = event.getFormattedDate()
+        
+        DispatchQueue.main.async {
+            ImageHelper.shared.fetchImage(urlString: event.images[0].url) { (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let image):
+                    cell.listImage.image = image
+                }
+            }
         }
         return cell
     }
@@ -120,5 +160,7 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
 
 //MARK: SearchBar
 extension ListItemsVC: UISearchBarDelegate {
-    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchQuery = searchBar.text
+    }
 }

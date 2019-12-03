@@ -9,6 +9,9 @@
 import UIKit
 
 class DetailVC: UIViewController {
+    var ticketEvent: Event?
+    
+    
     //MARK: - Objects
     var detailImage: UIImageView = {
         let image = UIImageView()
@@ -20,6 +23,7 @@ class DetailVC: UIViewController {
         label.text = "Main Description"
         label.font = UIFont.systemFont(ofSize: 20)
         label.textAlignment = .center
+        label.numberOfLines = 2
         return label
     }()
     var heartButton: UIButton = {

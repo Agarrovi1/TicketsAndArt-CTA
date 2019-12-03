@@ -18,4 +18,5 @@ enum AppError: Error {
     case notAnImage
     case other(rawError: Error)
     case couldNotEncode
+    case noSearchResults
 }
