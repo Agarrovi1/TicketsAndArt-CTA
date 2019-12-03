@@ -27,6 +27,7 @@ struct Event: Codable {
     let url: String
     let images: [ImageWrapper]
     let dates: DatesWrapper
+    let priceRanges: [PriceRange]?
     
     func getFormattedDate() -> String {
         let beforeDateFormatter = DateFormatter()
@@ -53,6 +54,19 @@ struct Start: Codable {
     let dateTime: String
     let localDate: String
     let localTime: String
+}
+struct PriceRange: Codable {
+    let type: PriceRangeType
+    let currency: Currency
+    let min, max: Double
+}
+
+enum Currency: String, Codable {
+    case usd = "USD"
+}
+
+enum PriceRangeType: String, Codable {
+    case standard = "standard"
 }
 
 struct Page: Codable {

@@ -21,7 +21,9 @@ class ListItemsVC: UIViewController {
                 return
             }
             DispatchQueue.main.async {
+                if self.apiType == "Ticketmaster" {
                 self.loadEvents(query: searchQuery.lowercased())
+                }
             }
         }
     }

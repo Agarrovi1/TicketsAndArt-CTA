@@ -96,7 +96,26 @@ class DetailVC: UIViewController {
     private func loadTicketInfo() {
         if let event = ticketEvent {
             detailMainDescription.text = event.name
+            if let priceRange = event.priceRanges {
+                detailTextView.text = "Start Date:\(event.getFormattedDate())\n\n\(event.url)\n\nPrice Range: \(priceRange[0].min) - \(priceRange[0].max) \(priceRange[0].currency)"
+            } else {
             detailTextView.text = "Start Date:\(event.getFormattedDate())\n\n\(event.url)"
+            }
+        }
+    }
+    private func loadTicketImage() {
+        guard let event = ticketEvent else {
+            return
+        }
+        DispatchQueue.main.async {
+            ImageHelper.shared.fetchImage(urlString: event.images[0].url) { (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let imageFromNetwork):
+                    self.detailImage.image = imageFromNetwork
+                }
+            }
         }
     }
 
