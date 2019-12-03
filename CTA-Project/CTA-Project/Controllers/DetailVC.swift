@@ -93,20 +93,16 @@ class DetailVC: UIViewController {
     }
     
     //MARK: Functions
-    private func loadTicketInfo() {
-        if let event = ticketEvent {
-            detailMainDescription.text = event.name
-            if let priceRange = event.priceRanges {
-                detailTextView.text = "Start Date:\(event.getFormattedDate())\n\n\(event.url)\n\nPrice Range: \(priceRange[0].min) - \(priceRange[0].max) \(priceRange[0].currency)"
-            } else {
+    private func loadTicketInfo(event: Event) {
+        detailMainDescription.text = event.name
+        if let priceRange = event.priceRanges {
+            detailTextView.text = "Start Date:\(event.getFormattedDate())\n\n\(event.url)\n\nPrice Range: \(priceRange[0].min) - \(priceRange[0].max) \(priceRange[0].currency)"
+        } else {
             detailTextView.text = "Start Date:\(event.getFormattedDate())\n\n\(event.url)"
-            }
         }
+        
     }
-    private func loadTicketImage() {
-        guard let event = ticketEvent else {
-            return
-        }
+    private func loadTicketImage(event: Event) {
         DispatchQueue.main.async {
             ImageHelper.shared.fetchImage(urlString: event.images[0].url) { (result) in
                 switch result {
@@ -118,13 +114,19 @@ class DetailVC: UIViewController {
             }
         }
     }
+    private func loadInfo() {
+        if let event = ticketEvent {
+            loadTicketInfo(event: event)
+            loadTicketImage(event: event)
+        }
+    }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         setupDetailVC()
-        loadTicketInfo()
+        loadInfo()
         
     }
     

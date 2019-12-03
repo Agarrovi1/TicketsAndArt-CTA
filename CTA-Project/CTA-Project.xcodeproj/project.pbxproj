@@ -31,6 +31,7 @@
 		4D222A262396CE000039722D /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A252396CE000039722D /* ImageHelper.swift */; };
 		4D222A282396CEDF0039722D /* TicketMasterWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A272396CEDF0039722D /* TicketMasterWrapper.swift */; };
 		4D222A2A2396D1090039722D /* TicketAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A292396D1090039722D /* TicketAPIHelper.swift */; };
+		4D222A2C239700AD0039722D /* FavoriteTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A2B239700AD0039722D /* FavoriteTickets.swift */; };
 		B40ED67C052088F63967048D /* Pods_CTA_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8526CB0D9B546BE6E2C10C5 /* Pods_CTA_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +74,7 @@
 		4D222A252396CE000039722D /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		4D222A272396CEDF0039722D /* TicketMasterWrapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketMasterWrapper.swift; sourceTree = "<group>"; };
 		4D222A292396D1090039722D /* TicketAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketAPIHelper.swift; sourceTree = "<group>"; };
+		4D222A2B239700AD0039722D /* FavoriteTickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTickets.swift; sourceTree = "<group>"; };
 		617F2FE5EFAF89D31C3E66F2 /* Pods-CTA-ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		895F6CF899CFFE4196F6C181 /* Pods-CTA-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-Project.release.xcconfig"; path = "Target Support Files/Pods-CTA-Project/Pods-CTA-Project.release.xcconfig"; sourceTree = "<group>"; };
 		A053FDB9413DF0DCE4BAC36A /* Pods-CTA-ProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -182,6 +184,7 @@
 			children = (
 				4D222A152395AEC20039722D /* AppUser.swift */,
 				4D222A272396CEDF0039722D /* TicketMasterWrapper.swift */,
+				4D222A2B239700AD0039722D /* FavoriteTickets.swift */,
 				4D222A222396CDBD0039722D /* NetworkHandlers */,
 				4D222A172395AEED0039722D /* FireBase */,
 			);
@@ -388,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D222A2C239700AD0039722D /* FavoriteTickets.swift in Sources */,
 				4D222A102395968C0039722D /* FavoritesVC.swift in Sources */,
 				4D222A1B2395B4D30039722D /* FirestoreService.swift in Sources */,
 				4D2229E1239566F40039722D /* AppDelegate.swift in Sources */,

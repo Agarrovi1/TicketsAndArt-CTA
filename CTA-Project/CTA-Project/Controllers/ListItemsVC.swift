@@ -139,6 +139,7 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
         let event = events[indexPath.row]
         cell.mainDescriptionLabel.text = event.name
         cell.additionalInfo.text = event.getFormattedDate()
+        cell.heartButton.tag = indexPath.row
         
         DispatchQueue.main.async {
             ImageHelper.shared.fetchImage(urlString: event.images[0].url) { (result) in
@@ -165,5 +166,6 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
 extension ListItemsVC: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchQuery = searchBar.text
+        searchBar.resignFirstResponder()
     }
 }

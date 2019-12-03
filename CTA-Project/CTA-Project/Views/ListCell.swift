@@ -16,6 +16,7 @@ class ListCell: UITableViewCell {
     }
     var heartStatus: HeartStatus = .notFilled
 
+    //MARK: - Overrides
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -36,7 +37,7 @@ class ListCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: Objects
+    //MARK: - Objects
     var listImage: UIImageView = {
         let image = UIImageView()
         image.backgroundColor = .blue
@@ -62,6 +63,8 @@ class ListCell: UITableViewCell {
     }()
     var heartButton: UIButton = {
         let button = UIButton()
+        button.tintColor = .red
+        button.isUserInteractionEnabled = true
         
         let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
         let heart = UIImage(systemName: "heart", withConfiguration: config)
@@ -73,7 +76,8 @@ class ListCell: UITableViewCell {
         newFrame.height = 70
         button.frame.size = newFrame
         
-        button.tintColor = .red
+        
+        
         return button
     }()
     
@@ -90,6 +94,7 @@ class ListCell: UITableViewCell {
             ])
     }
     func setHeartButtonContraints() {
+    heartButton.addTarget(self, action: #selector(buttonTapped(sender:)), for: .touchUpInside)
         contentView.addSubview(heartButton)
         heartButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -114,6 +119,29 @@ class ListCell: UITableViewCell {
             additionalInfo.topAnchor.constraint(equalTo: mainDescriptionLabel.bottomAnchor, constant: 20),
             additionalInfo.trailingAnchor.constraint(equalTo: mainDescriptionLabel.trailingAnchor),
             additionalInfo.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)])
+    }
+    
+    //MARK: Function
+    @objc func buttonTapped(sender: UIButton) {
+        switch heartStatus {
+        case .notFilled:
+            heartStatus = .filled
+            makeHeartFill()
+        case .filled:
+            heartStatus = .notFilled
+            makeHeartEmpty()
+        }
+        
+    }
+    func makeHeartFill() {
+        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
+        let heart = UIImage(systemName: "heart.fill", withConfiguration: config)
+        heartButton.setImage(heart, for: .normal)
+    }
+    func makeHeartEmpty() {
+        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
+        let heart = UIImage(systemName: "heart", withConfiguration: config)
+        heartButton.setImage(heart, for: .normal)
     }
     
     
