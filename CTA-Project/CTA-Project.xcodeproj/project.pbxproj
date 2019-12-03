@@ -25,6 +25,10 @@
 		4D222A162395AEC20039722D /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A152395AEC20039722D /* AppUser.swift */; };
 		4D222A192395AF180039722D /* FirebaseAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A182395AF180039722D /* FirebaseAuthService.swift */; };
 		4D222A1B2395B4D30039722D /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A1A2395B4D30039722D /* FirestoreService.swift */; };
+		4D222A1F2396CC320039722D /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A1E2396CC320039722D /* Secrets.swift */; };
+		4D222A212396CDB80039722D /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A202396CDB80039722D /* AppError.swift */; };
+		4D222A242396CDDD0039722D /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A232396CDDD0039722D /* NetworkManager.swift */; };
+		4D222A262396CE000039722D /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A252396CE000039722D /* ImageHelper.swift */; };
 		B40ED67C052088F63967048D /* Pods_CTA_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8526CB0D9B546BE6E2C10C5 /* Pods_CTA_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -61,6 +65,10 @@
 		4D222A152395AEC20039722D /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		4D222A182395AF180039722D /* FirebaseAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthService.swift; sourceTree = "<group>"; };
 		4D222A1A2395B4D30039722D /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		4D222A1E2396CC320039722D /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		4D222A202396CDB80039722D /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		4D222A232396CDDD0039722D /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		4D222A252396CE000039722D /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		617F2FE5EFAF89D31C3E66F2 /* Pods-CTA-ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		895F6CF899CFFE4196F6C181 /* Pods-CTA-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-Project.release.xcconfig"; path = "Target Support Files/Pods-CTA-Project/Pods-CTA-Project.release.xcconfig"; sourceTree = "<group>"; };
 		A053FDB9413DF0DCE4BAC36A /* Pods-CTA-ProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +134,7 @@
 				4D222A03239567D70039722D /* Views */,
 				4D222A02239567CC0039722D /* Controllers */,
 				4D2229E6239566F40039722D /* Main.storyboard */,
+				4D222A1E2396CC320039722D /* Secrets.swift */,
 				4D2229E9239566F80039722D /* Assets.xcassets */,
 				4D2229EB239566F80039722D /* LaunchScreen.storyboard */,
 				4D2229EE239566F80039722D /* Info.plist */,
@@ -168,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				4D222A152395AEC20039722D /* AppUser.swift */,
+				4D222A222396CDBD0039722D /* NetworkHandlers */,
 				4D222A172395AEED0039722D /* FireBase */,
 			);
 			path = Models;
@@ -180,6 +190,16 @@
 				4D222A1A2395B4D30039722D /* FirestoreService.swift */,
 			);
 			path = FireBase;
+			sourceTree = "<group>";
+		};
+		4D222A222396CDBD0039722D /* NetworkHandlers */ = {
+			isa = PBXGroup;
+			children = (
+				4D222A202396CDB80039722D /* AppError.swift */,
+				4D222A232396CDDD0039722D /* NetworkManager.swift */,
+				4D222A252396CE000039722D /* ImageHelper.swift */,
+			);
+			path = NetworkHandlers;
 			sourceTree = "<group>";
 		};
 		E9698DCE6522E9AF1B4FC807 /* Pods */ = {
@@ -368,12 +388,16 @@
 				4D222A0C2395794B0039722D /* ListItemsVC.swift in Sources */,
 				4D2229E3239566F40039722D /* SceneDelegate.swift in Sources */,
 				4D222A192395AF180039722D /* FirebaseAuthService.swift in Sources */,
+				4D222A212396CDB80039722D /* AppError.swift in Sources */,
 				4D222A0E23957F350039722D /* ListCell.swift in Sources */,
 				4D222A12239599FB0039722D /* DetailVC.swift in Sources */,
 				4D222A162395AEC20039722D /* AppUser.swift in Sources */,
 				4D222A0A2395791D0039722D /* ItemsTabBarController.swift in Sources */,
 				4D222A0823956CD80039722D /* SignInVC.swift in Sources */,
+				4D222A242396CDDD0039722D /* NetworkManager.swift in Sources */,
+				4D222A1F2396CC320039722D /* Secrets.swift in Sources */,
 				4D222A062395683B0039722D /* LoginVC.swift in Sources */,
+				4D222A262396CE000039722D /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
