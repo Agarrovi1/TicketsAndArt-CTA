@@ -9,6 +9,12 @@
 import UIKit
 
 class ListItemsVC: UIViewController {
+    //MARK: - Properties
+    var apiType = "" {
+        didSet {
+            print(apiType)
+        }
+    }
     
     //MARK: - Objects
     var listTableView: UITableView = {
@@ -44,12 +50,35 @@ class ListItemsVC: UIViewController {
             listTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)])
     }
     
+    //MARK: - Functions
+    private func getUserApiType() {
+        DispatchQueue.global(qos: .default).async {
+            guard let currentUser = FirebaseAuthService.manager.currentUser else {
+                return
+            }
+            FirestoreService.manager.getUserApiType(from: currentUser.uid) { (result) in
+                switch result {
+                case .success(let currentApiType):
+                    self.apiType = currentApiType
+                case .failure(let error):
+                    self.makeAlert(with: "Error could not load list", and: "\(error)")
+                }
+            }
+        }
+    }
+    private func makeAlert(with title: String, and message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
+    
     
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .systemPink
         setupListUI()
+        getUserApiType()
 
     }
 
