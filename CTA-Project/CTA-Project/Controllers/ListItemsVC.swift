@@ -23,6 +23,8 @@ class ListItemsVC: UIViewController {
             DispatchQueue.main.async {
                 if self.apiType == "Ticketmaster" {
                 self.loadEvents(query: searchQuery.lowercased())
+                } else if self.apiType == "Rijksmuseum" {
+                    self.loadArtworks(query: searchQuery)
                 }
             }
         }
@@ -32,6 +34,7 @@ class ListItemsVC: UIViewController {
             listTableView.reloadData()
         }
     }
+    var artworks = [ArtObject]()
     
     //MARK: - Objects
     var listTableView: UITableView = {
@@ -82,6 +85,12 @@ class ListItemsVC: UIViewController {
     }
     
     //MARK: - Functions
+    private func makeAlert(with title: String, and message: String) {
+        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alertVC, animated: true, completion: nil)
+    }
+    
     private func getUserApiType() {
         DispatchQueue.global(qos: .default).async {
             guard let currentUser = FirebaseAuthService.manager.currentUser else {
@@ -97,6 +106,12 @@ class ListItemsVC: UIViewController {
             }
         }
     }
+    private func updateHeartsFor(experience: String, cell: ListCell, id: String) {
+        if apiType == "Ticketmaster" {
+            updateTicketHearts(id: id, cell: cell)
+        }
+    }
+    //MARK: TicketMaster
     private func loadEvents(query: String) {
         TicketAPIHelper.manager.getEvents(query: query) { (result) in
             switch result {
@@ -108,11 +123,7 @@ class ListItemsVC: UIViewController {
             }
         }
     }
-    private func makeAlert(with title: String, and message: String) {
-        let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
-        present(alertVC, animated: true, completion: nil)
-    }
+    
     private func updateTicketHearts(id: String, cell: ListCell) {
         FirestoreService.manager.getFavTickets { (result) in
             switch result {
@@ -126,6 +137,18 @@ class ListItemsVC: UIViewController {
                 } else {
                     cell.makeHeartEmpty()
                 }
+            }
+        }
+    }
+    //MARK: Museum
+    private func loadArtworks(query: String) {
+        MuseumAPIHelper.manager.getArtObjects(query: query) { (result) in
+            switch result {
+            case .failure(let error):
+                self.makeAlert(with: "Unable to find results for this query", and: "Try something else")
+            case .success(let arts):
+                self.artworks = arts
+                dump(arts)
             }
         }
     }
@@ -152,23 +175,25 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ListCell else {
             return UITableViewCell()
         }
-        let event = events[indexPath.row]
-        cell.mainDescriptionLabel.text = event.name
-        cell.additionalInfo.text = event.getFormattedDate()
-        cell.heartButton.tag = indexPath.row
-        cell.delegate = self
-        
-        updateTicketHearts(id: event.id, cell: cell)
-        
-        DispatchQueue.main.async {
-            ImageHelper.shared.fetchImage(urlString: event.images[0].url) { (result) in
-                switch result {
-                case .failure(let error):
-                    print(error)
-                case .success(let image):
-                    cell.listImage.image = image
+        if events.count > 0 {
+            let event = events[indexPath.row]
+            cell.mainDescriptionLabel.text = event.name
+            cell.additionalInfo.text = event.getFormattedDate()
+            cell.heartButton.tag = indexPath.row
+            cell.delegate = self
+            updateHeartsFor(experience: apiType, cell: cell, id: event.id)
+            
+            DispatchQueue.main.async {
+                ImageHelper.shared.fetchImage(urlString: event.images[0].url) { (result) in
+                    switch result {
+                    case .failure(let error):
+                        print(error)
+                    case .success(let image):
+                        cell.listImage.image = image
+                    }
                 }
             }
+            return cell
         }
         return cell
     }

@@ -33,6 +33,8 @@
 		4D222A2A2396D1090039722D /* TicketAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A292396D1090039722D /* TicketAPIHelper.swift */; };
 		4D222A2C239700AD0039722D /* FavoriteTickets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A2B239700AD0039722D /* FavoriteTickets.swift */; };
 		4D222A33239711480039722D /* HeartButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A32239711480039722D /* HeartButtonDelegate.swift */; };
+		4D222A35239817630039722D /* MuseumArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A34239817620039722D /* MuseumArt.swift */; };
+		4D222A37239819DA0039722D /* MuseumAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A36239819DA0039722D /* MuseumAPIHelper.swift */; };
 		B40ED67C052088F63967048D /* Pods_CTA_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8526CB0D9B546BE6E2C10C5 /* Pods_CTA_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -77,6 +79,8 @@
 		4D222A292396D1090039722D /* TicketAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketAPIHelper.swift; sourceTree = "<group>"; };
 		4D222A2B239700AD0039722D /* FavoriteTickets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTickets.swift; sourceTree = "<group>"; };
 		4D222A32239711480039722D /* HeartButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButtonDelegate.swift; sourceTree = "<group>"; };
+		4D222A34239817620039722D /* MuseumArt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumArt.swift; sourceTree = "<group>"; };
+		4D222A36239819DA0039722D /* MuseumAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumAPIHelper.swift; sourceTree = "<group>"; };
 		617F2FE5EFAF89D31C3E66F2 /* Pods-CTA-ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		895F6CF899CFFE4196F6C181 /* Pods-CTA-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-Project.release.xcconfig"; path = "Target Support Files/Pods-CTA-Project/Pods-CTA-Project.release.xcconfig"; sourceTree = "<group>"; };
 		A053FDB9413DF0DCE4BAC36A /* Pods-CTA-ProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -187,6 +191,7 @@
 				4D222A152395AEC20039722D /* AppUser.swift */,
 				4D222A272396CEDF0039722D /* TicketMasterWrapper.swift */,
 				4D222A2B239700AD0039722D /* FavoriteTickets.swift */,
+				4D222A34239817620039722D /* MuseumArt.swift */,
 				4D222A222396CDBD0039722D /* NetworkHandlers */,
 				4D222A172395AEED0039722D /* FireBase */,
 				4D222A32239711480039722D /* HeartButtonDelegate.swift */,
@@ -210,6 +215,7 @@
 				4D222A232396CDDD0039722D /* NetworkManager.swift */,
 				4D222A252396CE000039722D /* ImageHelper.swift */,
 				4D222A292396D1090039722D /* TicketAPIHelper.swift */,
+				4D222A36239819DA0039722D /* MuseumAPIHelper.swift */,
 			);
 			path = NetworkHandlers;
 			sourceTree = "<group>";
@@ -408,7 +414,9 @@
 				4D222A12239599FB0039722D /* DetailVC.swift in Sources */,
 				4D222A162395AEC20039722D /* AppUser.swift in Sources */,
 				4D222A0A2395791D0039722D /* ItemsTabBarController.swift in Sources */,
+				4D222A35239817630039722D /* MuseumArt.swift in Sources */,
 				4D222A0823956CD80039722D /* SignInVC.swift in Sources */,
+				4D222A37239819DA0039722D /* MuseumAPIHelper.swift in Sources */,
 				4D222A242396CDDD0039722D /* NetworkManager.swift in Sources */,
 				4D222A282396CEDF0039722D /* TicketMasterWrapper.swift in Sources */,
 				4D222A1F2396CC320039722D /* Secrets.swift in Sources */,
