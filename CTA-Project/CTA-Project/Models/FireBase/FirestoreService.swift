@@ -129,6 +129,20 @@ class FirestoreService {
             }
         }
     }
+    func getFavTicketsFor(userId: String, completion: @escaping (Result<[FavoriteTickets],Error>) -> ()) {
+        db.collection(FireStoreCollections.favTickets.rawValue).whereField("createdBy", isEqualTo: userId).getDocuments { (snapshot, error) in
+           if let error = error {
+               completion(.failure(error))
+           } else {
+               let users = snapshot?.documents.compactMap({ (snapshot) -> FavoriteTickets? in
+                   let ticketID = snapshot.documentID
+                   let user = FavoriteTickets(from: snapshot.data(), id: ticketID)
+                   return user
+               })
+               completion(.success(users ?? []))
+           }
+       }
+    }
     func unfavoritedTicket(ticketId: String, completion: @escaping (Result<(),Error>) ->()) {
         db.collection(FireStoreCollections.favTickets.rawValue).document(ticketId).delete { (error) in
             if let error = error {
@@ -151,6 +165,20 @@ class FirestoreService {
     }
     func getFavArtworks(completion: @escaping (Result<[FavoriteMuseumArtworks],Error>) -> ()) {
         db.collection(FireStoreCollections.favArts.rawValue).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let artworks = snapshot?.documents.compactMap({ (snapshot) -> FavoriteMuseumArtworks? in
+                    let artId = snapshot.documentID
+                    let user = FavoriteMuseumArtworks(from: snapshot.data(), id: artId)
+                    return user
+                })
+                completion(.success(artworks ?? []))
+            }
+        }
+    }
+    func getFavArtsFor(userId: String, completion: @escaping (Result<[FavoriteMuseumArtworks],Error>) -> ()) {
+        db.collection(FireStoreCollections.favArts.rawValue).whereField("createdby", isEqualTo: userId).getDocuments { (snapshot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
