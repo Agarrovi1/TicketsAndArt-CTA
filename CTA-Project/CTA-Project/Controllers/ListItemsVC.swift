@@ -34,7 +34,11 @@ class ListItemsVC: UIViewController {
             listTableView.reloadData()
         }
     }
-    var artworks = [ArtObject]()
+    var artworks = [ArtObject]() {
+        didSet {
+            listTableView.reloadData()
+        }
+    }
     
     //MARK: - Objects
     var listTableView: UITableView = {
@@ -140,6 +144,26 @@ class ListItemsVC: UIViewController {
             }
         }
     }
+    private func updateCellWithTicketEvents(_ indexPath: IndexPath, _ cell: ListCell) {
+        let event = events[indexPath.row]
+        cell.mainDescriptionLabel.text = event.name
+        cell.additionalInfo.text = event.getFormattedDate()
+        cell.heartButton.tag = indexPath.row
+        cell.delegate = self
+        
+        updateHeartsFor(experience: apiType, cell: cell, id: event.id)
+        
+        DispatchQueue.main.async {
+            ImageHelper.shared.fetchImage(urlString: event.images[0].url) { (result) in
+                switch result {
+                case .failure(let error):
+                    print(error)
+                case .success(let image):
+                    cell.listImage.image = image
+                }
+            }
+        }
+    }
     //MARK: Museum
     private func loadArtworks(query: String) {
         MuseumAPIHelper.manager.getArtObjects(query: query) { (result) in
@@ -168,32 +192,47 @@ class ListItemsVC: UIViewController {
 //MARK: - Extensions: TableView
 extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        if apiType == "Ticketmaster" {
+            return events.count
+        } else if apiType == "Rijksmuseum" {
+            return artworks.count
+        }
+        return 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ListCell else {
             return UITableViewCell()
         }
-        if events.count > 0 {
-            let event = events[indexPath.row]
-            cell.mainDescriptionLabel.text = event.name
-            cell.additionalInfo.text = event.getFormattedDate()
+        if apiType == "Ticketmaster" {
+            updateCellWithTicketEvents(indexPath, cell)
+            return cell
+        } else if apiType == "Rijksmuseum" {
+            let art = artworks[indexPath.row]
+            cell.mainDescriptionLabel.text = art.title
+            cell.additionalInfo.text = art.principalOrFirstMaker
             cell.heartButton.tag = indexPath.row
             cell.delegate = self
-            updateHeartsFor(experience: apiType, cell: cell, id: event.id)
             
             DispatchQueue.main.async {
-                ImageHelper.shared.fetchImage(urlString: event.images[0].url) { (result) in
-                    switch result {
-                    case .failure(let error):
-                        print(error)
-                    case .success(let image):
-                        cell.listImage.image = image
+                if art.hasImage {
+                    if let webImageUrl = art.webImage?.url {
+                        ImageHelper.shared.fetchImage(urlString: webImageUrl) { (result) in
+                            switch result {
+                            case .failure(let error):
+                                print(error)
+                                cell.listImage.image = UIImage(named: "noImage")
+                            case .success(let artImage):
+                                cell.listImage.image = artImage
+                            }
+                        }
+                    } else {
+                        cell.listImage.image = UIImage(named: "noImage")
                     }
+                } else {
+                    cell.listImage.image = UIImage(named: "noImage")
                 }
             }
-            return cell
         }
         return cell
     }

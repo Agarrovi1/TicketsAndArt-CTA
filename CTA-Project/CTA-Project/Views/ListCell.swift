@@ -126,11 +126,9 @@ class ListCell: UITableViewCell {
     @objc func buttonTapped(sender: UIButton) {
         switch heartStatus {
         case .notFilled:
-            heartStatus = .filled
             makeHeartFill()
             delegate?.saveToPersistance(tag: sender.tag)
         case .filled:
-            heartStatus = .notFilled
             makeHeartEmpty()
             delegate?.deleteFromPersistance(tag: sender.tag)
         }
