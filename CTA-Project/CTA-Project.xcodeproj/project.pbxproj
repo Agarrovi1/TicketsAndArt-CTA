@@ -35,6 +35,7 @@
 		4D222A33239711480039722D /* HeartButtonDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A32239711480039722D /* HeartButtonDelegate.swift */; };
 		4D222A35239817630039722D /* MuseumArt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A34239817620039722D /* MuseumArt.swift */; };
 		4D222A37239819DA0039722D /* MuseumAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A36239819DA0039722D /* MuseumAPIHelper.swift */; };
+		4D222A3923983FC80039722D /* FavoriteMuseumArtworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A3823983FC80039722D /* FavoriteMuseumArtworks.swift */; };
 		B40ED67C052088F63967048D /* Pods_CTA_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8526CB0D9B546BE6E2C10C5 /* Pods_CTA_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +82,7 @@
 		4D222A32239711480039722D /* HeartButtonDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeartButtonDelegate.swift; sourceTree = "<group>"; };
 		4D222A34239817620039722D /* MuseumArt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumArt.swift; sourceTree = "<group>"; };
 		4D222A36239819DA0039722D /* MuseumAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumAPIHelper.swift; sourceTree = "<group>"; };
+		4D222A3823983FC80039722D /* FavoriteMuseumArtworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMuseumArtworks.swift; sourceTree = "<group>"; };
 		617F2FE5EFAF89D31C3E66F2 /* Pods-CTA-ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		895F6CF899CFFE4196F6C181 /* Pods-CTA-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-Project.release.xcconfig"; path = "Target Support Files/Pods-CTA-Project/Pods-CTA-Project.release.xcconfig"; sourceTree = "<group>"; };
 		A053FDB9413DF0DCE4BAC36A /* Pods-CTA-ProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				4D222A272396CEDF0039722D /* TicketMasterWrapper.swift */,
 				4D222A2B239700AD0039722D /* FavoriteTickets.swift */,
 				4D222A34239817620039722D /* MuseumArt.swift */,
+				4D222A3823983FC80039722D /* FavoriteMuseumArtworks.swift */,
 				4D222A222396CDBD0039722D /* NetworkHandlers */,
 				4D222A172395AEED0039722D /* FireBase */,
 				4D222A32239711480039722D /* HeartButtonDelegate.swift */,
@@ -401,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D222A2C239700AD0039722D /* FavoriteTickets.swift in Sources */,
+				4D222A3923983FC80039722D /* FavoriteMuseumArtworks.swift in Sources */,
 				4D222A102395968C0039722D /* FavoritesVC.swift in Sources */,
 				4D222A1B2395B4D30039722D /* FirestoreService.swift in Sources */,
 				4D2229E1239566F40039722D /* AppDelegate.swift in Sources */,

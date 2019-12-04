@@ -172,7 +172,6 @@ class ListItemsVC: UIViewController {
                 self.makeAlert(with: "Unable to find results for this query", and: "Try something else")
             case .success(let arts):
                 self.artworks = arts
-                dump(arts)
             }
         }
     }
@@ -182,6 +181,8 @@ class ListItemsVC: UIViewController {
         cell.additionalInfo.text = art.principalOrFirstMaker
         cell.heartButton.tag = indexPath.row
         cell.delegate = self
+        
+        updateArtHearts(id: art.objectNumber, cell: cell)
         
         DispatchQueue.main.async {
             if art.hasImage {
@@ -200,6 +201,69 @@ class ListItemsVC: UIViewController {
                 }
             } else {
                 cell.listImage.image = UIImage(named: "noImage")
+            }
+        }
+    }
+    //MARK: Firestore
+    private func saveFavTicketToFirestore(_ tag: Int) {
+        let favedEvent = events[tag]
+        let newFireStoreTicket = FavoriteTickets(createdBy: FirebaseAuthService.manager.currentUser?.uid ?? "", startDate: favedEvent.getFormattedDate(), imageUrl: favedEvent.images[0].url, ticketId: favedEvent.id)
+        FirestoreService.manager.createFaveTicket(favedTicket: newFireStoreTicket) { (result) in
+            switch result {
+            case .success:
+                print("Successfully saved in firestore")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    private func saveFavArtToFirestore(_ tag: Int) {
+        let favedArt = artworks[tag]
+        let newFirestoreArt = FavoriteMuseumArtworks(createdBy: FirebaseAuthService.manager.currentUser?.uid ?? "", principleMaker: favedArt.principalOrFirstMaker, imageUrl: favedArt.webImage?.url ?? "", objectId: favedArt.objectNumber)
+        FirestoreService.manager.createFaveArtwork(favedArt: newFirestoreArt) { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success:
+                print("Art successfully saved in firestore")
+            }
+        }
+    }
+    private func deleteTicketFromFirestore(_ tag: Int) {
+        let unFavedEvent = events[tag]
+        FirestoreService.manager.unfavoritedTicket(ticketId: unFavedEvent.id) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Problem deleting Ticket from FireStore: \(error)")
+            case .success:
+                print("Ticket successfully unfavorited")
+            }
+        }
+    }
+    private func deleteArtFromFirestore(_ tag: Int) {
+        let unFavedArt = artworks[tag]
+        FirestoreService.manager.unfavoritedArt(objectId: unFavedArt.objectNumber) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Problem deleting Art from FireStore: \(error)")
+            case .success:
+                print("Art successfully unfavorited")
+            }
+        }
+    }
+    private func updateArtHearts(id: String, cell: ListCell) {
+        FirestoreService.manager.getFavArtworks { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let favedArts):
+                if favedArts.contains(where: { (art) -> Bool in
+                    art.id == id
+                }) {
+                    cell.makeHeartFill()
+                } else {
+                    cell.makeHeartEmpty()
+                }
             }
         }
     }
@@ -231,6 +295,7 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "listCell", for: indexPath) as? ListCell else {
             return UITableViewCell()
         }
+        cell.listImage.image = nil
         if apiType == "Ticketmaster" {
             updateCellWithTicketEvents(indexPath, cell)
         } else if apiType == "Rijksmuseum" {
@@ -269,30 +334,21 @@ extension ListItemsVC: UISearchBarDelegate {
 //MARK: HeartButton
 extension ListItemsVC: HeartButtonDelegate {
     func saveToPersistance(tag: Int) {
-        let favedEvent = events[tag]
-        let newFireStoreTicket = FavoriteTickets(createdBy: FirebaseAuthService.manager.currentUser?.uid ?? "", startDate: favedEvent.getFormattedDate(), imageUrl: favedEvent.images[0].url, ticketId: favedEvent.id)
-        FirestoreService.manager.createFaveTicket(favedTicket: newFireStoreTicket) { (result) in
-            switch result {
-            case .success:
-                print("Successfully saved in firestore")
-            case .failure(let error):
-                print(error)
-            }
+        if apiType == "Ticketmaster" {
+        saveFavTicketToFirestore(tag)
+        } else if apiType == "Rijksmuseum" {
+            saveFavArtToFirestore(tag)
         }
-
     }
+    
+    
     
     func deleteFromPersistance(tag: Int) {
-        let unFavedEvent = events[tag]
-        FirestoreService.manager.unfavoritedTicket(ticketId: unFavedEvent.id) { (result) in
-            switch result {
-            case .failure(let error):
-                print("Problem deleting from FireStore: \(error)")
-            case .success:
-                print("successfully unfavorited")
-            }
+        if apiType == "Ticketmaster" {
+            deleteTicketFromFirestore(tag)
+        } else if apiType == "Rijksmuseum" {
+            deleteArtFromFirestore(tag)
         }
+        
     }
-    
-    
 }

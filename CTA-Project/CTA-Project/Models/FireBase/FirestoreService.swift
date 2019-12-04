@@ -12,7 +12,7 @@ import FirebaseFirestore
 enum FireStoreCollections: String {
     case users
     case favTickets
-    case comments
+    case favArts
 }
 
 enum SortingCriteria: String {
@@ -131,6 +131,40 @@ class FirestoreService {
     }
     func unfavoritedTicket(ticketId: String, completion: @escaping (Result<(),Error>) ->()) {
         db.collection(FireStoreCollections.favTickets.rawValue).document(ticketId).delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    //MARK: FavMuseumArts
+    func createFaveArtwork(favedArt: FavoriteMuseumArtworks, completion: @escaping (Result<(),Error>) -> ()) {
+        let fields = favedArt.fieldsDict
+        db.collection(FireStoreCollections.favArts.rawValue).document(favedArt.id).setData(fields) { (error) in
+            if let error = error {
+                completion(.failure(error))
+                print(error)
+            }
+            completion(.success(()))
+        }
+    }
+    func getFavArtworks(completion: @escaping (Result<[FavoriteMuseumArtworks],Error>) -> ()) {
+        db.collection(FireStoreCollections.favArts.rawValue).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let artworks = snapshot?.documents.compactMap({ (snapshot) -> FavoriteMuseumArtworks? in
+                    let artId = snapshot.documentID
+                    let user = FavoriteMuseumArtworks(from: snapshot.data(), id: artId)
+                    return user
+                })
+                completion(.success(artworks ?? []))
+            }
+        }
+    }
+    func unfavoritedArt(objectId: String, completion: @escaping (Result<(),Error>) ->()) {
+        db.collection(FireStoreCollections.favArts.rawValue).document(objectId).delete { (error) in
             if let error = error {
                 completion(.failure(error))
             } else {
