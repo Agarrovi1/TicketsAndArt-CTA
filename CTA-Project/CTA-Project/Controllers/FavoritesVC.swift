@@ -194,6 +194,53 @@ class FavoritesVC: UIViewController {
             }
         }
     }
+    //MARK: Firestore
+    private func saveFavTicketToFirestore(_ tag: Int) {
+        let favedEvent = favoriteTickets[tag]
+        let newFireStoreTicket = FavoriteTickets(createdBy: FirebaseAuthService.manager.currentUser?.uid ?? "", startDate: favedEvent.startDate ?? "", imageUrl: favedEvent.imageUrl ?? "", ticketId: favedEvent.id ,name: favedEvent.name ?? "")
+        FirestoreService.manager.createFaveTicket(favedTicket: newFireStoreTicket) { (result) in
+            switch result {
+            case .success:
+                print("Successfully saved in firestore")
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    private func saveFavArtToFirestore(_ tag: Int) {
+        let favedArt = favoriteArtObjects[tag]
+        let newFirestoreArt = FavoriteMuseumArtworks(createdBy: FirebaseAuthService.manager.currentUser?.uid ?? "", principleMaker: favedArt.principleMaker ?? "", imageUrl: favedArt.imageUrl ?? "", objectId: favedArt.id ,title: favedArt.title ?? "")
+        FirestoreService.manager.createFaveArtwork(favedArt: newFirestoreArt) { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success:
+                print("Art successfully saved in firestore")
+            }
+        }
+    }
+    private func deleteTicketFromFirestore(_ tag: Int) {
+        let unFavedEvent = favoriteTickets[tag]
+        FirestoreService.manager.unfavoritedTicket(ticketId: unFavedEvent.id) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Problem deleting Ticket from FireStore: \(error)")
+            case .success:
+                print("Ticket successfully unfavorited")
+            }
+        }
+    }
+    private func deleteArtFromFirestore(_ tag: Int) {
+        let unFavedArt = favoriteArtObjects[tag]
+        FirestoreService.manager.unfavoritedArt(objectId: unFavedArt.id) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Problem deleting Art from FireStore: \(error)")
+            case .success:
+                print("Art successfully unfavorited")
+            }
+        }
+    }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -210,7 +257,7 @@ class FavoritesVC: UIViewController {
 
 }
 
-//MARK: Extensions
+//MARK: Extensions - TableView
 extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if apiType == Experience.ticketmaster.rawValue {
@@ -236,13 +283,22 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+//MARK: Extension
 extension FavoritesVC: HeartButtonDelegate {
     func saveToPersistance(tag: Int) {
-        
+        if apiType == "Ticketmaster" {
+            saveFavTicketToFirestore(tag)
+        } else if apiType == "Rijksmuseum" {
+            saveFavArtToFirestore(tag)
+        }
     }
     
     func deleteFromPersistance(tag: Int) {
-        
+        if apiType == "Ticketmaster" {
+            deleteTicketFromFirestore(tag)
+        } else if apiType == "Rijksmuseum" {
+            deleteArtFromFirestore(tag)
+        }
     }
     
     

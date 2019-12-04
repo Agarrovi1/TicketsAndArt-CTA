@@ -345,6 +345,5 @@ extension ListItemsVC: HeartButtonDelegate {
         } else if apiType == "Rijksmuseum" {
             deleteArtFromFirestore(tag)
         }
-        
     }
 }

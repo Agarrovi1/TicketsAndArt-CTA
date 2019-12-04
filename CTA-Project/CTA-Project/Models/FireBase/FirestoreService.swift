@@ -178,7 +178,7 @@ class FirestoreService {
         }
     }
     func getFavArtsFor(userId: String, completion: @escaping (Result<[FavoriteMuseumArtworks],Error>) -> ()) {
-        db.collection(FireStoreCollections.favArts.rawValue).whereField("createdby", isEqualTo: userId).getDocuments { (snapshot, error) in
+        db.collection(FireStoreCollections.favArts.rawValue).whereField("createdBy", isEqualTo: userId).getDocuments { (snapshot, error) in
             if let error = error {
                 completion(.failure(error))
             } else {
