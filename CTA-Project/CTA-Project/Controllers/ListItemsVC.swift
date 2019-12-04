@@ -209,21 +209,19 @@ extension ListItemsVC: HeartButtonDelegate {
                 print(error)
             }
         }
-//        do {
-//            try FavTicketsPersistence.manager.save(newElement: events[tag])
-//            print("saved ticket")
-//        } catch {
-//            print(error)
-//        }
+
     }
     
     func deleteFromPersistance(tag: Int) {
         let unFavedEvent = events[tag]
-//        do {
-//            try FavTicketsPersistence.manager.delete(at: unFavedEvent.id)
-//        } catch {
-//            print(error)
-//        }
+        FirestoreService.manager.unfavoritedTicket(ticketId: unFavedEvent.id) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Problem deleting from FireStore: \(error)")
+            case .success:
+                print("successfully unfavorited")
+            }
+        }
     }
     
     

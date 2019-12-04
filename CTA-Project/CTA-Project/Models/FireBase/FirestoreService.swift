@@ -129,6 +129,15 @@ class FirestoreService {
             }
         }
     }
+    func unfavoritedTicket(ticketId: String, completion: @escaping (Result<(),Error>) ->()) {
+        db.collection(FireStoreCollections.favTickets.rawValue).document(ticketId).delete { (error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
     
     
     private init () {}
