@@ -12,30 +12,35 @@ struct FavoriteMuseumArtworks {
     let createdBy: String?
     let principleMaker: String?
     let imageUrl: String?
+    let title: String?
     
-    init(createdBy: String, principleMaker: String, imageUrl: String, objectId: String) {
+    init(createdBy: String, principleMaker: String, imageUrl: String, objectId: String, title: String) {
         self.id = objectId
         self.createdBy = createdBy
         self.principleMaker = principleMaker
         self.imageUrl = imageUrl
+        self.title = title
     }
     
     init?(from dict: [String: Any], id: String) {
         guard let createdBy = dict["createdBy"] as? String,
             let principleMaker = dict["principleMaker"] as? String,
-            let imageUrl = dict["imageUrl"] as? String else { return nil }
+            let imageUrl = dict["imageUrl"] as? String,
+        let title = dict["title"] as? String else { return nil }
         
         self.createdBy = createdBy
         self.id = id
         self.principleMaker = principleMaker
         self.imageUrl = imageUrl
+        self.title = title
     }
     
     var fieldsDict: [String: Any] {
         return [
             "createdBy": self.createdBy ?? "",
             "principleMaker": self.principleMaker ?? "",
-            "imageUrl": self.imageUrl ?? ""
+            "imageUrl": self.imageUrl ?? "",
+            "title": self.title ?? ""
         ]
     }
 }
