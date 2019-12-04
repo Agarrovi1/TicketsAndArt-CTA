@@ -15,8 +15,18 @@ enum HeartStatus {
 
 class DetailVC: UIViewController {
     var ticketEvent: Event?
+    var art: ArtObject?
     var heartStatus: HeartStatus = .notFilled
-    
+    var artDetail: String = "" {
+        didSet {
+            guard let art = art else {
+                return
+            }
+            detailMainDescription.text = art.title
+            loadArtImage(art: art)
+            loadArtDescription(art: art)
+        }
+    }
     
     //MARK: - Objects
     var detailImage: UIImageView = {
@@ -98,7 +108,37 @@ class DetailVC: UIViewController {
             detailTextView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50)])
     }
     
-    //MARK: Functions
+    //MARK: - Functions
+    private func loadInfo() {
+        if let event = ticketEvent {
+            loadTicketInfo(event: event)
+            loadTicketImage(event: event)
+        } else if let art = art {
+            getArtDescription(art: art)
+        }
+    }
+    private func setHeartImage() {
+        switch heartStatus {
+        case .filled:
+            makeHeartFill()
+        case .notFilled:
+            makeHeartEmpty()
+        }
+    }
+    private func makeHeartFill() {
+        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
+        let heart = UIImage(systemName: "heart.fill", withConfiguration: config)
+        heartButton.setImage(heart, for: .normal)
+        heartStatus = .filled
+    }
+    private func makeHeartEmpty() {
+        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
+        let heart = UIImage(systemName: "heart", withConfiguration: config)
+        heartButton.setImage(heart, for: .normal)
+        heartStatus = .notFilled
+    }
+    
+    //MARK: TicketMaster
     private func loadTicketInfo(event: Event) {
         detailMainDescription.text = event.name
         if let priceRange = event.priceRanges {
@@ -120,30 +160,54 @@ class DetailVC: UIViewController {
             }
         }
     }
-    private func loadInfo() {
-        if let event = ticketEvent {
-            loadTicketInfo(event: event)
-            loadTicketImage(event: event)
+    
+    //MARK: Museum
+    private func getArtDescription(art: ArtObject) {
+        MuseumAPIHelper.manager.getArtDetail(objectId: art.objectNumber) { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let detail):
+                self.artDetail = detail
+            }
         }
     }
-    private func setHeartImage() {
-        switch heartStatus {
-        case .filled:
-            makeHeartFill()
-        case .notFilled:
-            makeHeartEmpty()
+    private func loadArtImage(art: ArtObject) {
+        DispatchQueue.main.async {
+            if art.hasImage {
+                if let webImageUrl = art.webImage?.url {
+                    ImageHelper.shared.fetchImage(urlString: webImageUrl) { (result) in
+                        switch result {
+                        case .failure(let error):
+                            print(error)
+                            self.detailImage.image = UIImage(named: "noImage")
+                        case .success(let artImage):
+                            self.detailImage.image = artImage
+                        }
+                    }
+                } else {
+                    self.detailImage.image = UIImage(named: "noImage")
+                }
+            } else {
+                self.detailImage.image = UIImage(named: "noImage")
+            }
         }
     }
-    private func makeHeartFill() {
-        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
-        let heart = UIImage(systemName: "heart.fill", withConfiguration: config)
-        heartButton.setImage(heart, for: .normal)
+    private func loadArtDescription(art: ArtObject) {
+        detailTextView.text += art.longTitle
+        
+        if art.productionPlaces.count > 0 {
+            let placeOfProduction = art.productionPlaces.reduce("") { (result, place) -> String in
+                return result + " " + place
+            }
+            detailTextView.text += "\n\nPlace(s) of Production: \(placeOfProduction)"
+        } else {
+            detailTextView.text += "\n\nPlace(s) of Production: Unknown"
+        }
+        
+        detailTextView.text += "\n\n\(artDetail)"
     }
-    private func makeHeartEmpty() {
-        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
-        let heart = UIImage(systemName: "heart", withConfiguration: config)
-        heartButton.setImage(heart, for: .normal)
-    }
+    
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -154,8 +218,5 @@ class DetailVC: UIViewController {
         loadInfo()
         
     }
-    
-
-    
 
 }

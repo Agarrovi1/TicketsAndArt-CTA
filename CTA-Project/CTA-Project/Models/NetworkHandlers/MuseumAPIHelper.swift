@@ -31,4 +31,24 @@ class MuseumAPIHelper {
             }
         }
     }
+    func getArtDetail(objectId: String, completionHandler: @escaping (Result<String,AppError>) -> ()) {
+        let urlString = Secrets.makeMuseumDetailUrlString(objectId: objectId)
+        guard let url = URL(string: urlString) else {
+            completionHandler(.failure(.badURL))
+            return
+        }
+        NetworkHelper.manager.performDataTask(withUrl: url, andMethod: .get) { (result) in
+            switch result {
+            case .failure(let error):
+                completionHandler(.failure(error))
+            case .success(let data):
+                do {
+                    let museumDetail = try JSONDecoder().decode(MuseumArtDetail.self, from: data)
+                    completionHandler(.success(museumDetail.artObject.plaqueDescriptionEnglish))
+                } catch {
+                    completionHandler(.failure(.couldNotParseJSON(rawError: error)))
+                }
+            }
+        }
+    }
 }

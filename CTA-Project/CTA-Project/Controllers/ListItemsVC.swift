@@ -176,6 +176,33 @@ class ListItemsVC: UIViewController {
             }
         }
     }
+    private func updateCellWithMuseumArt(_ indexPath: IndexPath, _ cell: ListCell) {
+        let art = artworks[indexPath.row]
+        cell.mainDescriptionLabel.text = art.title
+        cell.additionalInfo.text = art.principalOrFirstMaker
+        cell.heartButton.tag = indexPath.row
+        cell.delegate = self
+        
+        DispatchQueue.main.async {
+            if art.hasImage {
+                if let webImageUrl = art.webImage?.url {
+                    ImageHelper.shared.fetchImage(urlString: webImageUrl) { (result) in
+                        switch result {
+                        case .failure(let error):
+                            print(error)
+                            cell.listImage.image = UIImage(named: "noImage")
+                        case .success(let artImage):
+                            cell.listImage.image = artImage
+                        }
+                    }
+                } else {
+                    cell.listImage.image = UIImage(named: "noImage")
+                }
+            } else {
+                cell.listImage.image = UIImage(named: "noImage")
+            }
+        }
+    }
     
     
     //MARK: - LifeCycle
@@ -206,39 +233,18 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
         }
         if apiType == "Ticketmaster" {
             updateCellWithTicketEvents(indexPath, cell)
-            return cell
         } else if apiType == "Rijksmuseum" {
-            let art = artworks[indexPath.row]
-            cell.mainDescriptionLabel.text = art.title
-            cell.additionalInfo.text = art.principalOrFirstMaker
-            cell.heartButton.tag = indexPath.row
-            cell.delegate = self
-            
-            DispatchQueue.main.async {
-                if art.hasImage {
-                    if let webImageUrl = art.webImage?.url {
-                        ImageHelper.shared.fetchImage(urlString: webImageUrl) { (result) in
-                            switch result {
-                            case .failure(let error):
-                                print(error)
-                                cell.listImage.image = UIImage(named: "noImage")
-                            case .success(let artImage):
-                                cell.listImage.image = artImage
-                            }
-                        }
-                    } else {
-                        cell.listImage.image = UIImage(named: "noImage")
-                    }
-                } else {
-                    cell.listImage.image = UIImage(named: "noImage")
-                }
-            }
+            updateCellWithMuseumArt(indexPath, cell)
         }
         return cell
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailVC()
-        detailVC.ticketEvent = events[indexPath.row]
+        if apiType == "Ticketmaster" {
+            detailVC.ticketEvent = events[indexPath.row]
+        } else if apiType == "Rijksmuseum" {
+            detailVC.art = artworks[indexPath.row]
+        }
         guard let cell = tableView.cellForRow(at: indexPath) as? ListCell else {return}
         switch cell.heartStatus {
         case .filled:
