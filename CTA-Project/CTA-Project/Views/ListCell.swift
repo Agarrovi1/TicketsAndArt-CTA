@@ -15,6 +15,7 @@ class ListCell: UITableViewCell {
         case notFilled
     }
     var heartStatus: HeartStatus = .notFilled
+    var delegate: HeartButtonDelegate?
 
     //MARK: - Overrides
     override func awakeFromNib() {
@@ -127,9 +128,11 @@ class ListCell: UITableViewCell {
         case .notFilled:
             heartStatus = .filled
             makeHeartFill()
+            delegate?.saveToPersistance(tag: sender.tag)
         case .filled:
             heartStatus = .notFilled
             makeHeartEmpty()
+            delegate?.deleteFromPersistance(tag: sender.tag)
         }
         
     }
@@ -137,11 +140,13 @@ class ListCell: UITableViewCell {
         let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
         let heart = UIImage(systemName: "heart.fill", withConfiguration: config)
         heartButton.setImage(heart, for: .normal)
+        heartStatus = .filled
     }
     func makeHeartEmpty() {
         let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
         let heart = UIImage(systemName: "heart", withConfiguration: config)
         heartButton.setImage(heart, for: .normal)
+        heartStatus = .notFilled
     }
     
     

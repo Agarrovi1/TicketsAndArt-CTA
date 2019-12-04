@@ -10,6 +10,7 @@ import UIKit
 
 class FavoritesVC: UIViewController {
     
+    
     //MARK: - Objects
     var favTableView: UITableView = {
         let table = UITableView()

@@ -7,11 +7,35 @@
 //
 
 import Foundation
-class FavoriteTickets: Codable {
+struct FavoriteTickets {
+    let id: String
+    let createdBy: String?
+    let startDate: String?
+    let imageUrl: String?
     
-    var events: [Event]
+    init(createdBy: String, startDate: String, imageUrl: String, ticketId: String) {
+        self.id = ticketId
+        self.createdBy = createdBy
+        self.startDate = startDate
+        self.imageUrl = imageUrl
+    }
     
-    init(events: [Event]) {
-        self.events = events
+    init?(from dict: [String: Any], id: String) {
+        guard let createdBy = dict["createdBy"] as? String,
+            let startDate = dict["startDate"] as? String,
+        let imageUrl = dict["imageUrl"] as? String else { return nil }
+        
+        self.createdBy = createdBy
+        self.id = id
+        self.startDate = startDate
+        self.imageUrl = imageUrl
+    }
+    
+    var fieldsDict: [String: Any] {
+        return [
+            "createdBy": self.createdBy ?? "",
+            "startDate": self.startDate ?? "",
+            "imageUrl": self.imageUrl ?? ""
+        ]
     }
 }

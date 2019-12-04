@@ -8,8 +8,14 @@
 
 import UIKit
 
+enum HeartStatus {
+    case filled
+    case notFilled
+}
+
 class DetailVC: UIViewController {
     var ticketEvent: Event?
+    var heartStatus: HeartStatus = .notFilled
     
     
     //MARK: - Objects
@@ -120,12 +126,31 @@ class DetailVC: UIViewController {
             loadTicketImage(event: event)
         }
     }
+    private func setHeartImage() {
+        switch heartStatus {
+        case .filled:
+            makeHeartFill()
+        case .notFilled:
+            makeHeartEmpty()
+        }
+    }
+    private func makeHeartFill() {
+        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
+        let heart = UIImage(systemName: "heart.fill", withConfiguration: config)
+        heartButton.setImage(heart, for: .normal)
+    }
+    private func makeHeartEmpty() {
+        let config = UIImage.SymbolConfiguration(pointSize: 40, weight: UIImage.SymbolWeight.medium)
+        let heart = UIImage(systemName: "heart", withConfiguration: config)
+        heartButton.setImage(heart, for: .normal)
+    }
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = #colorLiteral(red: 0.9764705896, green: 0.850980401, blue: 0.5490196347, alpha: 1)
         setupDetailVC()
+        setHeartImage()
         loadInfo()
         
     }

@@ -113,6 +113,22 @@ class ListItemsVC: UIViewController {
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
     }
+    private func updateTicketHearts(id: String, cell: ListCell) {
+        FirestoreService.manager.getFavTickets { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success(let favedTickets):
+                if favedTickets.contains(where: { (ticket) -> Bool in
+                    ticket.id == id
+                }) {
+                    cell.makeHeartFill()
+                } else {
+                    cell.makeHeartEmpty()
+                }
+            }
+        }
+    }
     
     
     //MARK: - LifeCycle
@@ -140,6 +156,9 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
         cell.mainDescriptionLabel.text = event.name
         cell.additionalInfo.text = event.getFormattedDate()
         cell.heartButton.tag = indexPath.row
+        cell.delegate = self
+        
+        updateTicketHearts(id: event.id, cell: cell)
         
         DispatchQueue.main.async {
             ImageHelper.shared.fetchImage(urlString: event.images[0].url) { (result) in
@@ -156,6 +175,13 @@ extension ListItemsVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailVC = DetailVC()
         detailVC.ticketEvent = events[indexPath.row]
+        guard let cell = tableView.cellForRow(at: indexPath) as? ListCell else {return}
+        switch cell.heartStatus {
+        case .filled:
+            detailVC.heartStatus = .filled
+        case .notFilled:
+            detailVC.heartStatus = .notFilled
+        }
         navigationController?.pushViewController(detailVC, animated: true)
     }
     
@@ -168,4 +194,37 @@ extension ListItemsVC: UISearchBarDelegate {
         searchQuery = searchBar.text
         searchBar.resignFirstResponder()
     }
+}
+
+//MARK: HeartButton
+extension ListItemsVC: HeartButtonDelegate {
+    func saveToPersistance(tag: Int) {
+        let favedEvent = events[tag]
+        let newFireStoreTicket = FavoriteTickets(createdBy: FirebaseAuthService.manager.currentUser?.uid ?? "", startDate: favedEvent.getFormattedDate(), imageUrl: favedEvent.images[0].url, ticketId: favedEvent.id)
+        FirestoreService.manager.createFaveTicket(favedTicket: newFireStoreTicket) { (result) in
+            switch result {
+            case .success:
+                print("Successfully saved in firestore")
+            case .failure(let error):
+                print(error)
+            }
+        }
+//        do {
+//            try FavTicketsPersistence.manager.save(newElement: events[tag])
+//            print("saved ticket")
+//        } catch {
+//            print(error)
+//        }
+    }
+    
+    func deleteFromPersistance(tag: Int) {
+        let unFavedEvent = events[tag]
+//        do {
+//            try FavTicketsPersistence.manager.delete(at: unFavedEvent.id)
+//        } catch {
+//            print(error)
+//        }
+    }
+    
+    
 }

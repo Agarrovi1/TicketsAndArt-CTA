@@ -11,7 +11,7 @@ import FirebaseFirestore
 
 enum FireStoreCollections: String {
     case users
-    case posts
+    case favTickets
     case comments
 }
 
@@ -103,6 +103,33 @@ class FirestoreService {
             }
         }
     }
+    
+    //MARK: FavTickets
+    func createFaveTicket(favedTicket: FavoriteTickets, completion: @escaping (Result<(),Error>) -> ()) {
+        let fields = favedTicket.fieldsDict
+        db.collection(FireStoreCollections.favTickets.rawValue).document(favedTicket.id).setData(fields) { (error) in
+            if let error = error {
+                completion(.failure(error))
+                print(error)
+            }
+            completion(.success(()))
+        }
+    }
+    func getFavTickets(completion: @escaping (Result<[FavoriteTickets],Error>) -> ()) {
+        db.collection(FireStoreCollections.favTickets.rawValue).getDocuments { (snapshot, error) in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let users = snapshot?.documents.compactMap({ (snapshot) -> FavoriteTickets? in
+                    let ticketID = snapshot.documentID
+                    let user = FavoriteTickets(from: snapshot.data(), id: ticketID)
+                    return user
+                })
+                completion(.success(users ?? []))
+            }
+        }
+    }
+    
     
     private init () {}
 }
