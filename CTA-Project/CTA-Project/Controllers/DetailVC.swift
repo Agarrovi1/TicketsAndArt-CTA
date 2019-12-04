@@ -69,6 +69,8 @@ class DetailVC: UIViewController {
         setMainLabelConstraints()
         setHeartConstraints()
         setTextViewConstraints()
+        
+        heartButton.addTarget(self, action: #selector(heartButtonPressed), for: .touchUpInside)
     }
     //MARK: - Constraints
     private func setDetailImageConstraints() {
@@ -137,6 +139,17 @@ class DetailVC: UIViewController {
         heartButton.setImage(heart, for: .normal)
         heartStatus = .notFilled
     }
+    //MARK: Objc
+    @objc func heartButtonPressed() {
+        switch heartStatus {
+        case .filled:
+            makeHeartEmpty()
+            deleteFromPersistance(tag: 0)
+        case .notFilled:
+            makeHeartFill()
+            saveToPersistance(tag: 0)
+        }
+    }
     
     //MARK: TicketMaster
     private func loadTicketInfo(event: Event) {
@@ -167,6 +180,9 @@ class DetailVC: UIViewController {
             switch result {
             case .failure(let error):
                 print(error)
+                self.detailMainDescription.text = art.title
+                self.loadArtImage(art: art)
+                self.loadArtDescription(art: art)
             case .success(let detail):
                 self.artDetail = detail
             }
@@ -208,6 +224,50 @@ class DetailVC: UIViewController {
         detailTextView.text += "\n\n\(artDetail)"
     }
     
+    //MARK: Firestore
+    private func addToFavArt(_ favedArt: ArtObject) {
+        let newFirestoreArt = FavoriteMuseumArtworks(createdBy: FirebaseAuthService.manager.currentUser?.uid ?? "", principleMaker: favedArt.principalOrFirstMaker, imageUrl: favedArt.webImage?.url ?? "", objectId: favedArt.objectNumber,title: favedArt.title)
+        FirestoreService.manager.createFaveArtwork(favedArt: newFirestoreArt) { (result) in
+            switch result {
+            case .failure(let error):
+                print(error)
+            case .success:
+                print("Art successfully saved in firestore")
+            }
+        }
+    }
+    private func addToFavTickets(_ ticketEvent: Event) {
+        let newFireStoreTicket = FavoriteTickets(createdBy: FirebaseAuthService.manager.currentUser?.uid ?? "", startDate: ticketEvent.getFormattedDate(), imageUrl: ticketEvent.images[0].url, ticketId: ticketEvent.id,name: ticketEvent.name)
+        FirestoreService.manager.createFaveTicket(favedTicket: newFireStoreTicket) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Problem Favoriting Ticket: \(error)")
+            case .success:
+                print("Faved ticket")
+            }
+        }
+    }
+    private func deleteTicketFromFirestore(_ ticketEvent: Event) {
+        FirestoreService.manager.unfavoritedTicket(ticketId: ticketEvent.id) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Problem deleting Ticket from FireStore: \(error)")
+            case .success:
+                print("Ticket successfully unfavorited")
+            }
+        }
+    }
+    private func deleteArtFromFirestore(_ unFavedArt: ArtObject) {
+        FirestoreService.manager.unfavoritedArt(objectId: unFavedArt.objectNumber) { (result) in
+            switch result {
+            case .failure(let error):
+                print("Problem deleting Art from FireStore: \(error)")
+            case .success:
+                print("Art successfully unfavorited")
+            }
+        }
+    }
+    
 
     //MARK: - LifeCycle
     override func viewDidLoad() {
@@ -219,4 +279,24 @@ class DetailVC: UIViewController {
         
     }
 
+}
+
+extension DetailVC: HeartButtonDelegate {
+    func saveToPersistance(tag: Int) {
+        if let ticketEvent = ticketEvent {
+            addToFavTickets(ticketEvent)
+        } else if let art = art {
+            addToFavArt(art)
+        }
+    }
+    
+    func deleteFromPersistance(tag: Int) {
+        if let ticket = ticketEvent {
+            deleteTicketFromFirestore(ticket)
+        } else if let art = art {
+            deleteArtFromFirestore(art)
+        }
+    }
+    
+    
 }

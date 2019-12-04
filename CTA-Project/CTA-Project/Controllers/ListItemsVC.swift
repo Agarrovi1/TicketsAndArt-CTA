@@ -17,16 +17,7 @@ class ListItemsVC: UIViewController {
     }
     var searchQuery: String? {
         didSet {
-            guard let searchQuery = searchQuery, !searchQuery.isEmpty else {
-                return
-            }
-            DispatchQueue.main.async {
-                if self.apiType == "Ticketmaster" {
-                self.loadEvents(query: searchQuery.lowercased())
-                } else if self.apiType == "Rijksmuseum" {
-                    self.loadArtworks(query: searchQuery)
-                }
-            }
+            loadSearchQuery()
         }
     }
     var events = [Event]() {
@@ -107,6 +98,18 @@ class ListItemsVC: UIViewController {
                 case .failure(let error):
                     self.makeAlert(with: "Error could not load list", and: "\(error)")
                 }
+            }
+        }
+    }
+    private func loadSearchQuery() {
+        guard let searchQuery = searchQuery, !searchQuery.isEmpty else {
+            return
+        }
+        DispatchQueue.main.async {
+            if self.apiType == "Ticketmaster" {
+            self.loadEvents(query: searchQuery.lowercased())
+            } else if self.apiType == "Rijksmuseum" {
+                self.loadArtworks(query: searchQuery)
             }
         }
     }
@@ -271,7 +274,10 @@ class ListItemsVC: UIViewController {
         view.backgroundColor = .systemPink
         setupListUI()
         getUserApiType()
-
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadSearchQuery()
     }
 
 }
