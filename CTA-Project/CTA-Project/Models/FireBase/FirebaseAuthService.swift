@@ -54,6 +54,20 @@ class FirebaseAuthService {
             }
         }
     }
+    func signOut() throws {
+        try auth.signOut()
+        let storyBoard : UIStoryboard = UIStoryboard(name: "Main", bundle:nil)
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+            let sceneDelegate = windowScene.delegate as? SceneDelegate, let window = sceneDelegate.window
+            else {
+                return
+        }
+        UIView.transition(with: window, duration: 0.3, options: .transitionFlipFromBottom, animations: {
+                if let logInVC = storyBoard.instantiateViewController(withIdentifier: "login") as? LoginVC {
+                    window.rootViewController = logInVC
+                }
+        }, completion: nil)
+    }
 
     private init () {}
 }

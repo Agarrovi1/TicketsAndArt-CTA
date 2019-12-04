@@ -12,7 +12,7 @@ class ListItemsVC: UIViewController {
     //MARK: - Properties
     var apiType = "" {
         didSet {
-            print(apiType)
+            navigationItem.title = "List for \(apiType)"
         }
     }
     var searchQuery: String? {
@@ -51,8 +51,7 @@ class ListItemsVC: UIViewController {
         setDelegates()
     }
     private func setupNavBar() {
-        navigationItem.title = "List of Things"
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left.square"), style: .done, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left.square"), style: .done, target: self, action: #selector(signOutButtonPressed))
     }
     private func setDelegates() {
         listTableView.delegate = self
@@ -263,6 +262,15 @@ class ListItemsVC: UIViewController {
             case .success:
                 print("Art successfully unfavorited")
             }
+        }
+    }
+    
+    //MARK: Objc
+    @objc func signOutButtonPressed() {
+        do {
+            try FirebaseAuthService.manager.signOut()
+        } catch {
+            makeAlert(with: "Problem signing out", and: "\(error)")
         }
     }
     

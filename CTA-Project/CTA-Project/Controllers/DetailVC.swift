@@ -60,7 +60,7 @@ class DetailVC: UIViewController {
     }()
     var detailTextView: UITextView = {
         let textView = UITextView()
-        textView.backgroundColor = .brown
+        textView.backgroundColor = .clear
         return textView
     }()
     //MARK: - Setup

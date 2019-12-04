@@ -51,7 +51,7 @@ class FavoritesVC: UIViewController {
         setDelegates()
     }
     private func setupNavBar() {
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left.square"), style: .done, target: nil, action: nil)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrow.left.square"), style: .done, target: self, action: #selector(signOutButtonPressed))
     }
     private func setDelegates() {
         favTableView.delegate = self
@@ -98,6 +98,14 @@ class FavoritesVC: UIViewController {
         let alertVC = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alertVC.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
         present(alertVC, animated: true, completion: nil)
+    }
+    //MARK: Objc
+    @objc func signOutButtonPressed() {
+        do {
+            try FirebaseAuthService.manager.signOut()
+        } catch {
+            makeAlert(with: "Problem signing out", and: "\(error)")
+        }
     }
     //MARK: Tickets
     private func loadFavTickets() {
