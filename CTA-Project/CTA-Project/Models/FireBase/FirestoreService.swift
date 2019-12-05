@@ -20,7 +20,7 @@ enum SortingCriteria: String {
     var shouldSortAscending: Bool {
         switch self {
         case .fromNewestToOldest:
-        return true
+            return true
         }
         
     }
@@ -131,17 +131,17 @@ class FirestoreService {
     }
     func getFavTicketsFor(userId: String, completion: @escaping (Result<[FavoriteTickets],Error>) -> ()) {
         db.collection(FireStoreCollections.favTickets.rawValue).whereField("createdBy", isEqualTo: userId).getDocuments { (snapshot, error) in
-           if let error = error {
-               completion(.failure(error))
-           } else {
-               let users = snapshot?.documents.compactMap({ (snapshot) -> FavoriteTickets? in
-                   let ticketID = snapshot.documentID
-                   let user = FavoriteTickets(from: snapshot.data(), id: ticketID)
-                   return user
-               })
-               completion(.success(users ?? []))
-           }
-       }
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                let users = snapshot?.documents.compactMap({ (snapshot) -> FavoriteTickets? in
+                    let ticketID = snapshot.documentID
+                    let user = FavoriteTickets(from: snapshot.data(), id: ticketID)
+                    return user
+                })
+                completion(.success(users ?? []))
+            }
+        }
     }
     func findIdOfUnfavored(ticket id: String, userId: String, completionHandler: @escaping (Result<String,Error>) -> ()) {
         db.collection(FireStoreCollections.favTickets.rawValue).whereField("createdBy", isEqualTo: userId).whereField("ticketId", isEqualTo: id).getDocuments { (snapshot, error) in
@@ -149,10 +149,10 @@ class FirestoreService {
                 completionHandler(.failure(error))
             } else {
                 let tickets = snapshot?.documents.compactMap({ (snapshot) -> FavoriteTickets? in
-                let ticketID = snapshot.documentID
-                let ticket = FavoriteTickets(from: snapshot.data(), id: ticketID)
-                return ticket
-                    })
+                    let ticketID = snapshot.documentID
+                    let ticket = FavoriteTickets(from: snapshot.data(), id: ticketID)
+                    return ticket
+                })
                 if let tickets = tickets {
                     completionHandler(.success(tickets[0].id))
                 }
@@ -164,11 +164,11 @@ class FirestoreService {
         case .success(let favId):
             db.collection(FireStoreCollections.favTickets.rawValue)
                 .document(favId).delete { (error) in
-                if let error = error {
-                    completion(.failure(error))
-                } else {
-                    completion(.success(()))
-                }
+                    if let error = error {
+                        completion(.failure(error))
+                    } else {
+                        completion(.success(()))
+                    }
             }
         case .failure(let error):
             completion(.failure(error))

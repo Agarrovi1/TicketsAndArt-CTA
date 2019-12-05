@@ -243,17 +243,17 @@ class FavoritesVC: UIViewController {
     private func deleteArtFromFirestore(_ tag: Int) {
         let unFavedArt = favoriteArtObjects[tag]
         FirestoreService.manager.findIdForUnFaved(art: unFavedArt.objectId ?? "", userId: FirebaseAuthService.manager.currentUser?.uid ?? "") { (result) in
-                   FirestoreService.manager.unfavoritedArt(result: result) { (result) in
-                       switch result {
-                       case .failure(let error):
-                           print("Problem deleting Art from FireStore: \(error)")
-                       case .success:
-                           print("Art successfully unfavorited")
-                       }
-                   }
-               }
+            FirestoreService.manager.unfavoritedArt(result: result) { (result) in
+                switch result {
+                case .failure(let error):
+                    print("Problem deleting Art from FireStore: \(error)")
+                case .success:
+                    print("Art successfully unfavorited")
+                }
+            }
+        }
     }
-
+    
     //MARK: - LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -265,8 +265,8 @@ class FavoritesVC: UIViewController {
         super.viewWillAppear(animated)
         reloadFavs()
     }
-
-
+    
+    
 }
 
 //MARK: Extensions - TableView
@@ -285,9 +285,9 @@ extension FavoritesVC: UITableViewDelegate, UITableViewDataSource {
             return UITableViewCell()
         }
         if apiType == Experience.ticketmaster.rawValue {
-           updateCellWithTicketEvents(indexPath, cell)
+            updateCellWithTicketEvents(indexPath, cell)
         } else if apiType == Experience.rijksmuseum.rawValue {
-           updateCellWithMuseumArt(indexPath, cell)
+            updateCellWithMuseumArt(indexPath, cell)
         }
         return cell
     }
