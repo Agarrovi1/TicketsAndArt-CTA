@@ -13,25 +13,29 @@ struct FavoriteTickets {
     let startDate: String?
     let imageUrl: String?
     let name: String?
+    let ticketId: String?
     
     init(createdBy: String, startDate: String, imageUrl: String, ticketId: String, name: String) {
-        self.id = ticketId
+        self.id = UUID.init().description
         self.createdBy = createdBy
         self.startDate = startDate
         self.imageUrl = imageUrl
         self.name = name
+        self.ticketId = ticketId
     }
     
     init?(from dict: [String: Any], id: String) {
         guard let createdBy = dict["createdBy"] as? String,
             let startDate = dict["startDate"] as? String,
         let imageUrl = dict["imageUrl"] as? String,
-        let name = dict["name"] as? String else { return nil }
+        let name = dict["name"] as? String,
+        let ticketId = dict["ticketId"] as? String else { return nil }
         self.createdBy = createdBy
         self.id = id
         self.startDate = startDate
         self.imageUrl = imageUrl
         self.name = name
+        self.ticketId = ticketId
     }
     
     var fieldsDict: [String: Any] {
@@ -39,7 +43,8 @@ struct FavoriteTickets {
             "createdBy": self.createdBy ?? "",
             "startDate": self.startDate ?? "",
             "imageUrl": self.imageUrl ?? "",
-            "name": self.name ?? ""
+            "name": self.name ?? "",
+            "ticketId": self.ticketId ?? ""
         ]
     }
 }

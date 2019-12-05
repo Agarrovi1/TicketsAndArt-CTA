@@ -229,12 +229,14 @@ class FavoritesVC: UIViewController {
     }
     private func deleteTicketFromFirestore(_ tag: Int) {
         let unFavedEvent = favoriteTickets[tag]
-        FirestoreService.manager.unfavoritedTicket(ticketId: unFavedEvent.id) { (result) in
-            switch result {
-            case .failure(let error):
-                print("Problem deleting Ticket from FireStore: \(error)")
-            case .success:
-                print("Ticket successfully unfavorited")
+        FirestoreService.manager.findIdOfUnfavored(ticket: unFavedEvent.id, userId: FirebaseAuthService.manager.currentUser?.uid ?? "") { (result) in
+            FirestoreService.manager.unfavoritedTicket(result: result) { (unFavresult) in
+                switch unFavresult {
+                case .failure(let error):
+                    print("Problem deleting Ticket from FireStore: \(error)")
+                case .success:
+                    print("Ticket successfully unfavorited")
+                }
             }
         }
     }

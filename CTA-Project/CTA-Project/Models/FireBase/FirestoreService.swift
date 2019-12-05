@@ -143,14 +143,37 @@ class FirestoreService {
            }
        }
     }
-    func unfavoritedTicket(ticketId: String, completion: @escaping (Result<(),Error>) ->()) {
-        db.collection(FireStoreCollections.favTickets.rawValue).document(ticketId).delete { (error) in
+    func findIdOfUnfavored(ticket id: String, userId: String, completionHandler: @escaping (Result<String,Error>) -> ()) {
+        db.collection(FireStoreCollections.favTickets.rawValue).whereField("createdBy", isEqualTo: userId).whereField("ticketId", isEqualTo: id).getDocuments { (snapshot, error) in
             if let error = error {
-                completion(.failure(error))
+                completionHandler(.failure(error))
             } else {
-                completion(.success(()))
+                let tickets = snapshot?.documents.compactMap({ (snapshot) -> FavoriteTickets? in
+                let ticketID = snapshot.documentID
+                let ticket = FavoriteTickets(from: snapshot.data(), id: ticketID)
+                return ticket
+                    })
+                if let tickets = tickets {
+                    completionHandler(.success(tickets[0].id))
+                }
             }
         }
+    }
+    func unfavoritedTicket(result: (Result<String,Error>), completion: @escaping (Result<(),Error>) -> ()) {
+        switch result {
+        case .success(let favId):
+            db.collection(FireStoreCollections.favTickets.rawValue)
+                .document(favId).delete { (error) in
+                if let error = error {
+                    completion(.failure(error))
+                } else {
+                    completion(.success(()))
+                }
+            }
+        case .failure(let error):
+            completion(.failure(error))
+        }
+        
     }
     //MARK: FavMuseumArts
     func createFaveArtwork(favedArt: FavoriteMuseumArtworks, completion: @escaping (Result<(),Error>) -> ()) {

@@ -40,6 +40,7 @@ class ListItemsVC: UIViewController {
     }()
     var listSearchBar: UISearchBar = {
         let bar = UISearchBar()
+        bar.placeholder = "Search a city for events"
         return bar
     }()
     
@@ -127,13 +128,13 @@ class ListItemsVC: UIViewController {
     }
     
     private func updateTicketHearts(id: String, cell: ListCell) {
-        FirestoreService.manager.getFavTickets { (result) in
+        FirestoreService.manager.getFavTicketsFor(userId: FirebaseAuthService.manager.currentUser?.uid ?? "") { (result) in
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let favedTickets):
                 if favedTickets.contains(where: { (ticket) -> Bool in
-                    ticket.id == id
+                    ticket.ticketId == id
                 }) {
                     cell.makeHeartFill()
                 } else {
@@ -203,13 +204,13 @@ class ListItemsVC: UIViewController {
         }
     }
     private func updateArtHearts(id: String, cell: ListCell) {
-        FirestoreService.manager.getFavArtworks { (result) in
+        FirestoreService.manager.getFavArtsFor(userId: FirebaseAuthService.manager.currentUser?.uid ?? "") { (result) in
             switch result {
             case .failure(let error):
                 print(error)
             case .success(let favedArts):
                 if favedArts.contains(where: { (art) -> Bool in
-                    art.id == id
+                    art.objectId == id
                 }) {
                     cell.makeHeartFill()
                 } else {
@@ -245,14 +246,16 @@ class ListItemsVC: UIViewController {
     }
     private func deleteTicketFromFirestore(_ tag: Int) {
         let unFavedEvent = events[tag]
-        FirestoreService.manager.unfavoritedTicket(ticketId: unFavedEvent.id) { (result) in
-            switch result {
-            case .failure(let error):
-                print("Problem deleting Ticket from FireStore: \(error)")
-            case .success:
-                print("Ticket successfully unfavorited")
-            }
-        }
+         FirestoreService.manager.findIdOfUnfavored(ticket: unFavedEvent.id, userId: FirebaseAuthService.manager.currentUser?.uid ?? "") { (result) in
+                   FirestoreService.manager.unfavoritedTicket(result: result) { (unFavresult) in
+                       switch unFavresult {
+                       case .failure(let error):
+                           print("Problem deleting Ticket from FireStore: \(error)")
+                       case .success:
+                           print("Ticket successfully unfavorited")
+                       }
+                   }
+               }
     }
     private func deleteArtFromFirestore(_ tag: Int) {
         let unFavedArt = artworks[tag]

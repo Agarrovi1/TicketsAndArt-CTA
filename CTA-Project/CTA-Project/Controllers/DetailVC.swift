@@ -248,14 +248,16 @@ class DetailVC: UIViewController {
         }
     }
     private func deleteTicketFromFirestore(_ ticketEvent: Event) {
-        FirestoreService.manager.unfavoritedTicket(ticketId: ticketEvent.id) { (result) in
-            switch result {
-            case .failure(let error):
-                print("Problem deleting Ticket from FireStore: \(error)")
-            case .success:
-                print("Ticket successfully unfavorited")
-            }
-        }
+        FirestoreService.manager.findIdOfUnfavored(ticket: ticketEvent.id, userId: FirebaseAuthService.manager.currentUser?.uid ?? "") { (result) in
+                   FirestoreService.manager.unfavoritedTicket(result: result) { (unFavresult) in
+                       switch unFavresult {
+                       case .failure(let error):
+                           print("Problem deleting Ticket from FireStore: \(error)")
+                       case .success:
+                           print("Ticket successfully unfavorited")
+                       }
+                   }
+               }
     }
     private func deleteArtFromFirestore(_ unFavedArt: ArtObject) {
         FirestoreService.manager.unfavoritedArt(objectId: unFavedArt.objectNumber) { (result) in
