@@ -61,12 +61,6 @@ class ListItemsVC: UIViewController {
     
     //MARK: - Contraints
     private func setListSearchBarConstraints() {
-        if apiType == Experience.ticketmaster.rawValue {
-            listSearchBar.placeholder = "Search a city for events"
-        } else if apiType == Experience.rijksmuseum.rawValue {
-            listSearchBar.placeholder = "Enter a term"
-        }
-        
         view.addSubview(listSearchBar)
         listSearchBar.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -122,6 +116,13 @@ class ListItemsVC: UIViewController {
         let cell = UITableViewCell()
         cell.textLabel?.text = "No results found"
         return cell
+    }
+    private func setupSearchBar() {
+        if apiType == Experience.ticketmaster.rawValue {
+            listSearchBar.placeholder = "Search a city for events"
+        } else if apiType == Experience.rijksmuseum.rawValue {
+            listSearchBar.placeholder = "Enter a term"
+        }
     }
     //MARK: TicketMaster
     private func loadEvents(query: String) {
@@ -298,6 +299,7 @@ class ListItemsVC: UIViewController {
         view.backgroundColor = .systemPink
         setupListUI()
         getUserApiType()
+        setupSearchBar()
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
