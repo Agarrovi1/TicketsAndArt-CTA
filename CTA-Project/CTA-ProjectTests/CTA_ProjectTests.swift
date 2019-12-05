@@ -49,5 +49,20 @@ class CTA_ProjectTests: XCTestCase {
         let testFormattedDate = testTicket.embedded.events[0].getFormattedDate()
         XCTAssertTrue(testFormattedDate == "02-08-2020 12:00")
     }
+    func testMuseumArtModel() {
+        let testMuseum = MuseumArt(artObjects: [ArtObject(id: "en-SK-A-4", objectNumber: "SK-A-4", title: "The Threatened Swan", hasImage: true, principalOrFirstMaker: "Jan Asselijn", longTitle: "The Threatened Swan, Jan Asselijn, c. 1650", webImage: WebImage(url: "https://lh3.googleusercontent.com/tm1DbZrAP0uBM-OJhLwvKir1Le5LglRF_bvbaNi6m-F_pIyttsWQz040soRY9pWA9PgNEYFA_fBkg_keYixRXCAjz9Q=s0"), productionPlaces: [])])
+        let testArtObject = testMuseum.artObjects[0]
+        XCTAssertTrue(testArtObject.hasImage)
+        XCTAssertTrue(testArtObject.id == "en-SK-A-4")
+        XCTAssertTrue(testArtObject.objectNumber == "SK-A-4")
+        XCTAssertTrue(testArtObject.title == "The Threatened Swan")
+        XCTAssertTrue(testArtObject.longTitle == "The Threatened Swan, Jan Asselijn, c. 1650")
+        XCTAssertNotNil(testArtObject.webImage)
+        XCTAssertNotNil(testArtObject.webImage?.url)
+        if let webImageUrl = testArtObject.webImage?.url {
+            XCTAssertTrue(webImageUrl == "https://lh3.googleusercontent.com/tm1DbZrAP0uBM-OJhLwvKir1Le5LglRF_bvbaNi6m-F_pIyttsWQz040soRY9pWA9PgNEYFA_fBkg_keYixRXCAjz9Q=s0")
+        }
+        XCTAssertTrue(testArtObject.productionPlaces.count == 0)
+    }
 
 }

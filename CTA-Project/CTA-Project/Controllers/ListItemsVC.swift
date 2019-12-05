@@ -133,7 +133,6 @@ class ListItemsVC: UIViewController {
                 print(error)
             case .success(let eventsFromJson):
                 self.events = eventsFromJson
-                dump(eventsFromJson)
             }
         }
     }
