@@ -37,6 +37,7 @@
 		4D222A37239819DA0039722D /* MuseumAPIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A36239819DA0039722D /* MuseumAPIHelper.swift */; };
 		4D222A3923983FC80039722D /* FavoriteMuseumArtworks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A3823983FC80039722D /* FavoriteMuseumArtworks.swift */; };
 		4D222A3B23984C930039722D /* Experience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D222A3A23984C930039722D /* Experience.swift */; };
+		4D909AB22399928900BBB154 /* SettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D909AB12399928900BBB154 /* SettingVC.swift */; };
 		B40ED67C052088F63967048D /* Pods_CTA_Project.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B8526CB0D9B546BE6E2C10C5 /* Pods_CTA_Project.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,7 @@
 		4D222A36239819DA0039722D /* MuseumAPIHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MuseumAPIHelper.swift; sourceTree = "<group>"; };
 		4D222A3823983FC80039722D /* FavoriteMuseumArtworks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMuseumArtworks.swift; sourceTree = "<group>"; };
 		4D222A3A23984C930039722D /* Experience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Experience.swift; sourceTree = "<group>"; };
+		4D909AB12399928900BBB154 /* SettingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingVC.swift; sourceTree = "<group>"; };
 		617F2FE5EFAF89D31C3E66F2 /* Pods-CTA-ProjectTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.release.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.release.xcconfig"; sourceTree = "<group>"; };
 		895F6CF899CFFE4196F6C181 /* Pods-CTA-Project.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-Project.release.xcconfig"; path = "Target Support Files/Pods-CTA-Project/Pods-CTA-Project.release.xcconfig"; sourceTree = "<group>"; };
 		A053FDB9413DF0DCE4BAC36A /* Pods-CTA-ProjectTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CTA-ProjectTests.debug.xcconfig"; path = "Target Support Files/Pods-CTA-ProjectTests/Pods-CTA-ProjectTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +179,7 @@
 				4D222A0B2395794B0039722D /* ListItemsVC.swift */,
 				4D222A0F2395968C0039722D /* FavoritesVC.swift */,
 				4D222A11239599FB0039722D /* DetailVC.swift */,
+				4D909AB12399928900BBB154 /* SettingVC.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				4D222A162395AEC20039722D /* AppUser.swift in Sources */,
 				4D222A0A2395791D0039722D /* ItemsTabBarController.swift in Sources */,
 				4D222A35239817630039722D /* MuseumArt.swift in Sources */,
+				4D909AB22399928900BBB154 /* SettingVC.swift in Sources */,
 				4D222A0823956CD80039722D /* SignInVC.swift in Sources */,
 				4D222A37239819DA0039722D /* MuseumAPIHelper.swift in Sources */,
 				4D222A242396CDDD0039722D /* NetworkManager.swift in Sources */,

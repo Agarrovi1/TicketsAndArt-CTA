@@ -112,11 +112,6 @@ class ListItemsVC: UIViewController {
             }
         }
     }
-    func makeNoneFoundTableCell() -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "No results found"
-        return cell
-    }
     private func setupSearchBar() {
         if apiType == Experience.ticketmaster.rawValue {
             listSearchBar.placeholder = "Search a city for events"
@@ -129,7 +124,7 @@ class ListItemsVC: UIViewController {
         TicketAPIHelper.manager.getEvents(query: query) { (result) in
             switch result {
             case .failure(let error):
-                //self.makeAlert(with: "Error", and: "\(error)")
+                self.makeAlert(with: "No Results Found", and: "sorry")
                 print(error)
             case .success(let eventsFromJson):
                 self.events = eventsFromJson
@@ -178,7 +173,7 @@ class ListItemsVC: UIViewController {
         MuseumAPIHelper.manager.getArtObjects(query: query) { (result) in
             switch result {
             case .failure(let error):
-                self.makeAlert(with: "Unable to find results for this query", and: "Try something else")
+                self.makeAlert(with: "No Results Found", and: "sorry")
             case .success(let arts):
                 self.artworks = arts
             }
@@ -303,6 +298,7 @@ class ListItemsVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadSearchQuery()
+        getUserApiType()
     }
     
 }

@@ -76,5 +76,52 @@
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="117.85714285714285"/>
         </scene>
+        <!--SettingVC-->
+        <scene sceneID="UiG-Ze-UNU">
+            <objects>
+                <viewController storyboardIdentifier="settingVC" id="YhJ-cG-eUK" customClass="SettingVC" customModule="CTA_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bnC-bJ-ylZ">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JVH-Sx-wk3">
+                                <rect key="frame" x="0.0" y="273" width="414" height="216"/>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Change Experience?" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="khG-jj-7si">
+                                <rect key="frame" x="42" y="128" width="330" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OxA-S6-N0K">
+                                <rect key="frame" x="190" y="613" width="34" height="30"/>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="settingButtonPressed:" destination="YhJ-cG-eUK" eventType="touchUpInside" id="IDn-kx-9Ae"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="khG-jj-7si" firstAttribute="leading" secondItem="dgg-hN-4WA" secondAttribute="leading" constant="42" id="AB7-wZ-U6y"/>
+                            <constraint firstItem="JVH-Sx-wk3" firstAttribute="top" secondItem="khG-jj-7si" secondAttribute="bottom" constant="104" id="Cbj-z5-zjI"/>
+                            <constraint firstItem="dgg-hN-4WA" firstAttribute="trailing" secondItem="khG-jj-7si" secondAttribute="trailing" constant="42" id="Cu7-EC-hhI"/>
+                            <constraint firstItem="OxA-S6-N0K" firstAttribute="top" secondItem="JVH-Sx-wk3" secondAttribute="bottom" constant="124" id="Ded-u5-jlW"/>
+                            <constraint firstItem="khG-jj-7si" firstAttribute="top" secondItem="dgg-hN-4WA" secondAttribute="top" constant="84" id="T3H-yJ-PVJ"/>
+                            <constraint firstItem="OxA-S6-N0K" firstAttribute="leading" secondItem="dgg-hN-4WA" secondAttribute="leading" constant="190" id="Wj1-4S-uCE"/>
+                            <constraint firstItem="dgg-hN-4WA" firstAttribute="trailing" secondItem="OxA-S6-N0K" secondAttribute="trailing" constant="190" id="bmD-gd-0G3"/>
+                            <constraint firstItem="dgg-hN-4WA" firstAttribute="trailing" secondItem="JVH-Sx-wk3" secondAttribute="trailing" id="mF6-D9-GLh"/>
+                            <constraint firstItem="JVH-Sx-wk3" firstAttribute="leading" secondItem="dgg-hN-4WA" secondAttribute="leading" id="uUZ-wt-pgA"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="dgg-hN-4WA"/>
+                    </view>
+                    <connections>
+                        <outlet property="settingPicker" destination="JVH-Sx-wk3" id="9aA-ef-cbe"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lc2-nx-gsa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1381" y="118"/>
+        </scene>
     </scenes>
 </document>
