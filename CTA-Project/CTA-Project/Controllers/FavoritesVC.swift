@@ -242,14 +242,16 @@ class FavoritesVC: UIViewController {
     }
     private func deleteArtFromFirestore(_ tag: Int) {
         let unFavedArt = favoriteArtObjects[tag]
-        FirestoreService.manager.unfavoritedArt(objectId: unFavedArt.id) { (result) in
-            switch result {
-            case .failure(let error):
-                print("Problem deleting Art from FireStore: \(error)")
-            case .success:
-                print("Art successfully unfavorited")
-            }
-        }
+        FirestoreService.manager.findIdForUnFaved(art: unFavedArt.objectId ?? "", userId: FirebaseAuthService.manager.currentUser?.uid ?? "") { (result) in
+                   FirestoreService.manager.unfavoritedArt(result: result) { (result) in
+                       switch result {
+                       case .failure(let error):
+                           print("Problem deleting Art from FireStore: \(error)")
+                       case .success:
+                           print("Art successfully unfavorited")
+                       }
+                   }
+               }
     }
 
     //MARK: - LifeCycle
